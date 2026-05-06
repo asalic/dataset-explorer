@@ -69,6 +69,7 @@ function MainView(props: MainViewProps) {
   const sortDirection: string = getSortDirectionDesc(searchParams.get("sortDirection"), searchParams.get("sortBy") ?? "creationDate");
   const skip: number = searchParams.get("skip") ? Number(searchParams.get("skip")) : 0;
   const limit: number = searchParams.get("limit") ? Number(searchParams.get("limit")) : config.defaultLimitDatasets;
+  const tag: string[] = searchParams.getAll("tag");
   
   const onSkipChange = useCallback((skip: number) => {
     updSearchParams({skip: skip === 0 ? null : skip});
@@ -121,7 +122,7 @@ function MainView(props: MainViewProps) {
         {
           token: keycloak.token, 
           qParams: {
-              skip, limit, searchString, sortBy, sortDirection, //v2: true,
+              skip, limit, searchString, sortBy, sortDirection, tag: [...tag],
               ...(searchParams.get("project") !== null) && {project: searchParams.get("project")},
               ...(searchParams.get("draft") !== null) && {draft: searchParams.get("draft")},
               ...(searchParams.get("public") !== null) && {public: searchParams.get("public")},

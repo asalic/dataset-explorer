@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Badge, Table as BTable } from 'react-bootstrap';
+import { Badge, Table as BTable, Button } from 'react-bootstrap';
 import { ArrowDownUp, CaretDownFill, CaretUpFill } from "react-bootstrap-icons";
 import { useTable, useRowSelect, useFilters, useGlobalFilter, useSortBy, Row, Column, CellProps } from 'react-table';
-import React, { Fragment, useMemo } from 'react';
-import {matchSorter} from 'match-sorter';
+import React, { Fragment, useMemo, useRef, useState } from 'react';
+import { matchSorter } from 'match-sorter';
 
 import DataManager from "../../../../api/DataManager";
 import MainTableSortBy from "../../../../model/MainTableSortBy"
@@ -13,6 +13,9 @@ import UrlFactory from "../../../../service/UrlFactory";
 import CopiableFieldEntryProps from "../../../common/CopiableFieldEntry";
 import SingleDataFactory from "../../../../api/SingleDataFactory";
 import SingleDataPageItem from "../../../../model/SingleDataPageItem";
+import TagComponent from "../../../common/tag/TagComponent";
+import TagsPopover from "../../../common/tag/TagsPopover";
+import styles from "./MainTable.module.css";
 
 
 // const IndeterminateCheckbox = forwardRef(
@@ -64,31 +67,31 @@ import SingleDataPageItem from "../../../../model/SingleDataPageItem";
 // }
 interface DefaultColumnFilterColumn {
 
-  filterValue: string;
-  preFilteredRows: Row[];
-  setFilter: Function;
+    filterValue: string;
+    preFilteredRows: Row[];
+    setFilter: Function;
 
 }
 
 interface DefaultColumnFilterProps {
-  column: DefaultColumnFilterColumn;
+    column: DefaultColumnFilterColumn;
 }
 
 
 function DefaultColumnFilter({
-  column: { filterValue, preFilteredRows, setFilter },
+    column: { filterValue, preFilteredRows, setFilter },
 }: DefaultColumnFilterProps): JSX.Element {
-  const count = preFilteredRows.length
+    const count = preFilteredRows.length
 
-  return (
-    <input
-      value={filterValue || ''}
-      onChange={e => {
-        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-      }}
-      placeholder={`Search ${count} records...`}
-    />
-  )
+    return (
+        <input
+            value={filterValue || ''}
+            onChange={e => {
+                setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+            }}
+            placeholder={`Search ${count} records...`}
+        />
+    )
 }
 
 // interface SelectColumnFilterColumn {
@@ -232,7 +235,7 @@ function DefaultColumnFilter({
 // }
 
 function fuzzyTextFilterFn(rows: ReadonlyArray<Row>, id: string, filterValue: string): Array<Row> {
-  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
+    return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
 }
 
 // Let the table remove the filter if the string is empty
@@ -247,17 +250,17 @@ fuzzyTextFilterFn.autoRemove = (val: string) => !val;
 // }
 
 interface MoreLinkProps {
-  row: Row<SingleDataPageItem>;
-  singleDataType: SingleDataType;
+    row: Row<SingleDataPageItem>;
+    singleDataType: SingleDataType;
 }
 
-function MoreLink({row, singleDataType}: MoreLinkProps): JSX.Element {
-  return  (
-    <div>
-      <Link className="btn btn-link" 
-        to={UrlFactory.singleDataDetails(row.original["id"], singleDataType)}>More</Link>
-    </div>
-  );
+function MoreLink({ row, singleDataType }: MoreLinkProps): JSX.Element {
+    return (
+        <div>
+            <Link className="btn btn-link"
+                to={UrlFactory.singleDataDetails(row.original["id"], singleDataType)}>More</Link>
+        </div>
+    );
 }
 
 // This is an autoRemove method on the filter function that
@@ -287,323 +290,341 @@ function MoreLink({row, singleDataType}: MoreLinkProps): JSX.Element {
 // }
 
 interface ColNameIdRenderProps {
-  row: Row<SingleDataPageItem>
+    row: Row<SingleDataPageItem>
 }
 
-function ColNameIdRender({row}: ColNameIdRenderProps): JSX.Element {
-  return (
-    <Fragment>
-    <span className="me-1">{row.original["name"]}</span>
-    (<i>{row.original["version"]}</i>)
-    {/* <br />
+function ColNameIdRender({ row }: ColNameIdRenderProps): JSX.Element {
+    return (
+        <Fragment>
+            <span className="me-1">{row.original["name"]}</span>
+            (<i>{row.original["version"]}</i>)
+            {/* <br />
     <span style={{fontSize: "80%" }}>version <i>{row.original["version"]}</i></span> */}
-    <br />
-      (<CopiableFieldEntryProps text={row.original["id"]} italicText={true}
-       
-       title={`Copy the ${SingleDataFactory.getTypeName(row.original["type"])} ID`}
-      />)
-      </Fragment>
-  );
+            <br />
+            (<CopiableFieldEntryProps text={row.original["id"]} italicText={true}
+
+                title={`Copy the ${SingleDataFactory.getTypeName(row.original["type"])} ID`}
+            />)
+        </Fragment>
+    );
 }
 
 interface ColFlagsRenderProps {
-  row: Row<SingleDataPageItem>
+    row: Row<SingleDataPageItem>
 }
 
-function ColFlagsRender({row}: ColFlagsRenderProps): JSX.Element {
-  return (
-      <div className="mt-1 mb-1">
-        {( row.original["invalidated"] ? <Fragment><Badge pill bg="secondary">Invalidated</Badge><br /></Fragment> : <Fragment /> )}
-        {( row.original["public"] ? <Badge pill bg="dark">Published</Badge> : <Fragment /> )}
-        {( row.original["draft"] ? <Badge pill bg="light" text="dark">Draft</Badge> : <Fragment /> )}
-      </div>
-  );
+function ColFlagsRender({ row }: ColFlagsRenderProps): JSX.Element {
+    return (
+        <div className="mt-1 mb-1">
+            {(row.original["invalidated"] ? <Fragment><Badge pill bg="secondary">Invalidated</Badge><br /></Fragment> : <Fragment />)}
+            {(row.original["public"] ? <Badge pill bg="dark">Published</Badge> : <Fragment />)}
+            {(row.original["draft"] ? <Badge pill bg="light" text="dark">Draft</Badge> : <Fragment />)}
+        </div>
+    );
 }
 
 interface ColTagsRenderProps {
-  row: Row<SingleDataPageItem>
+    row: Row<SingleDataPageItem>
 }
 
-function ColTagsRender({row}: ColTagsRenderProps): JSX.Element {
-  return (
-      <div className="mt-1 mb-1">
-        {
-            row.original["tags"] ? row.original["tags"]
-                    .map(t => <Badge pill key={t} bg="light" text="dark" className="ms-1 me-1">{t}</Badge>)
-                : <></>
-        }
-        
-      </div>
-  );
+function ColTagsRender({ row }: ColTagsRenderProps): JSX.Element {
+    const tags = row.original["tags"].slice(0, 3);
+    const [showTagsPopup, setShowTagsPopup] = useState(false);
+    const btnRef = useRef<HTMLButtonElement | null>(null);
+
+    return (
+        <div className="mt-1 mb-1 d-flex flex-wrap gap-1">
+            {
+                tags.map(t => <TagComponent key={t} text={t} isClickable={true}/>)
+            }
+            {
+                row.original["tags"].length > 3
+                    ? <div>
+                        <Button ref={btnRef} variant="link" onClick={() => setShowTagsPopup(!showTagsPopup)} 
+                                className="m-0 p-0 d-flex justify-content-center">
+                            <Badge bg="primary">
+                                +{row.original["tags"].length - 3} more
+                            </Badge>
+                        </Button>
+                        <TagsPopover setShow={setShowTagsPopup} show={showTagsPopup} tags={row.original["tags"]} targetRef={btnRef} />
+                    </div>
+                    : <></>
+            }
+        </div>
+    );
 }
 
 interface ColCreatedRenderProps {
-  row: Row<SingleDataPageItem>
-  // dateTimeParts: Array<string>
+    row: Row<SingleDataPageItem>
+    // dateTimeParts: Array<string>
 }
 
-function ColCreatedRender({row}: ColCreatedRenderProps): JSX.Element {
-  var dateTimeParts = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short', timeStyle: 'long' })
-                                                                 .format(Date.parse(row.original["creationDate"])).split(',');
-  return (
-    <Fragment>
-    {dateTimeParts[0]}
-    <br />
-    {dateTimeParts[1]}
-    </Fragment>
-  );
+function ColCreatedRender({ row }: ColCreatedRenderProps): JSX.Element {
+    var dateTimeParts = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short', timeStyle: 'long' })
+        .format(Date.parse(row.original["creationDate"])).split(',');
+    return (
+        <Fragment>
+            {dateTimeParts[0]}
+            <br />
+            {dateTimeParts[1]}
+        </Fragment>
+    );
 }
 
 interface TableProps {
 
-  singleDataType: SingleDataType;
-  columns: Array<Column<any>>;
-  data: Array<any>;
-  sortBy: MainTableSortBy[];
-  updSearchParams: Function;
+    singleDataType: SingleDataType;
+    columns: Array<Column<any>>;
+    data: Array<any>;
+    sortBy: MainTableSortBy[];
+    updSearchParams: Function;
 }
 
 function Table({ singleDataType, columns, data, sortBy, updSearchParams//, showDialog, dataManager, postMessage, onDialogDetailsClose 
-    }: TableProps) {
-  // const filterTypes = useMemo(
-  //   () => ({
-  //     // Add a new fuzzyTextFilterFn filter type.
-  //     fuzzyText: fuzzyTextFilterFn,
-  //     // Or, override the default text filter to use
-  //     // "startWith"
-  //     text: (rows: Row<Dataset>[], id: string, filterValue: string) => {
-  //       return rows.filter(row => {
-  //         const rowValue = row.values[id]
-  //         return rowValue !== undefined
-  //           ? String(rowValue)
-  //               .toLowerCase()
-  //               .startsWith(String(filterValue).toLowerCase())
-  //           : true
-  //       })
-  //     },
-  //   }),
-  //   []
-  // )
+}: TableProps) {
+    // const filterTypes = useMemo(
+    //   () => ({
+    //     // Add a new fuzzyTextFilterFn filter type.
+    //     fuzzyText: fuzzyTextFilterFn,
+    //     // Or, override the default text filter to use
+    //     // "startWith"
+    //     text: (rows: Row<Dataset>[], id: string, filterValue: string) => {
+    //       return rows.filter(row => {
+    //         const rowValue = row.values[id]
+    //         return rowValue !== undefined
+    //           ? String(rowValue)
+    //               .toLowerCase()
+    //               .startsWith(String(filterValue).toLowerCase())
+    //           : true
+    //       })
+    //     },
+    //   }),
+    //   []
+    // )
 
-  const defaultColumn = useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-    }),
-    []
-  );
+    const defaultColumn = useMemo(
+        () => ({
+            // Let's set up our default Filter UI
+            Filter: DefaultColumnFilter,
+        }),
+        []
+    );
 
-  // Use the state and functions returned from useTable to build your UI
-  const { getTableProps, headerGroups, rows, prepareRow,
-    //selectedFlatRows,
-     // getTableBodyProps,
-     // state,
-      //state: { selectedRowIds, globalFilter },
-      visibleColumns,
-      //setSortBy
-     // preGlobalFilteredRows,
-     // setGlobalFilter 
+    // Use the state and functions returned from useTable to build your UI
+    const { getTableProps, headerGroups, rows, prepareRow,
+        //selectedFlatRows,
+        // getTableBodyProps,
+        // state,
+        //state: { selectedRowIds, globalFilter },
+        visibleColumns,
+        //setSortBy
+        // preGlobalFilteredRows,
+        // setGlobalFilter 
     } = useTable<any>({
-      columns,
-      data,
-      defaultColumn, // Be sure to pass the defaultColumn option
-      //filterTypes,
-      manualSortBy: true,
-      initialState: {
-          sortBy
-      }
-    },
-    useFilters, // useFilters!
-    useGlobalFilter, // useGlobalFilter!
-    useSortBy,
-    useRowSelect,
-    hooks => {
-      hooks.visibleColumns.push(columns => [
-        // Let's make a column for selection
-        // {
-        //   id: 'selection',
-        //   // The header can use the table's getToggleAllRowsSelectedProps method
-        //   // to render a checkbox
-        //   Header: ({ getToggleAllRowsSelectedProps }) => (
-        //     <div>
-        //       <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-        //     </div>
-        //   ),
-        //   // The cell can use the individual row's getToggleRowSelectedProps method
-        //   // to the render a checkbox
-        //   Cell: ({ row }) => (
-        //     <div>
-        //       <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-        //     </div>
-        //   ),
-        // },
-
-        ...columns,
-        {
-          id: 'operations',
-          disableSortBy: true,
-          Cell: ({row}: CellProps<any>) => <MoreLink singleDataType={singleDataType} row={row}/>
+        columns,
+        data,
+        defaultColumn, // Be sure to pass the defaultColumn option
+        //filterTypes,
+        manualSortBy: true,
+        initialState: {
+            sortBy
         }
-      ])
-    }
-  );
+    },
+        useFilters, // useFilters!
+        useGlobalFilter, // useGlobalFilter!
+        useSortBy,
+        useRowSelect,
+        hooks => {
+            hooks.visibleColumns.push(columns => [
+                // Let's make a column for selection
+                // {
+                //   id: 'selection',
+                //   // The header can use the table's getToggleAllRowsSelectedProps method
+                //   // to render a checkbox
+                //   Header: ({ getToggleAllRowsSelectedProps }) => (
+                //     <div>
+                //       <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+                //     </div>
+                //   ),
+                //   // The cell can use the individual row's getToggleRowSelectedProps method
+                //   // to the render a checkbox
+                //   Cell: ({ row }) => (
+                //     <div>
+                //       <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+                //     </div>
+                //   ),
+                // },
 
-  // Render the UI for your table
-  return (
-    <BTable striped bordered hover size="sm" {...getTableProps()} >
-      <thead>
-        {headerGroups.map(headerGroup => {
-            const { key, ...hProps } = headerGroup.getHeaderGroupProps();
-            return (
-                <tr {...hProps} key="Header">
-                  {headerGroup.headers.map((column: any) =>  {
-                      const { key, ...restProps } = column.getHeaderProps(column.getSortByToggleProps());
-                      return (
-                            <th 
-                                key={`tr-${Math.random().toString(16).slice(2)}`}
-                                {...restProps}
-                                onClick={() => 
-                                  {
-                                    column.toggleSortBy(!column.isSortedDesc);
-                                    updSearchParams({sortBy: column.id, sortDirection: column.isSortedDesc ? "ascending" : "descending"});
-                                    //setSortBy(sortBy);
-                                  }} //column.toggleSortBy(!column.isSortedDesc)}
-                            >
-                              {column.render('Header')}
-                              <span>
-                                  { column.canSort ? (column.isSorted
-                                    ? (column.isSortedDesc
-                                      ? <CaretDownFill className="text-primary"/>
-                                      :  <CaretUpFill className="text-primary"/>)
-                                    : <ArrowDownUp className="ms-1 text-primary" size="0.75em"/> ) 
-                                  : ""}
-                                </span>
-                            </th>
-                          )
-                    }
-                  )}
-                </tr>
-              )
-          }
-        )}
-        <tr>
-          <th
-            colSpan={visibleColumns.length}
-            style={{
-              textAlign: 'left',
-            }}
-          >
-            {/*
+                ...columns,
+                {
+                    id: 'operations',
+                    disableSortBy: true,
+                    Cell: ({ row }: CellProps<any>) => <MoreLink singleDataType={singleDataType} row={row} />
+                }
+            ])
+        },
+    );
+
+    // Render the UI for your table
+    return (
+        <BTable striped bordered hover size="sm" {...getTableProps()} >
+            <thead>
+                {headerGroups.map(headerGroup => {
+                    const { key, ...hProps } = headerGroup.getHeaderGroupProps();
+                    return (
+                        <tr {...hProps} key="Header">
+                            {headerGroup.headers.map((column: any) => {
+                                const { key, ...restProps } = column.getHeaderProps({
+                                    ...column.getSortByToggleProps()
+                                });
+                                return (
+                                    <th
+                                        key={`tr-${Math.random().toString(16).slice(2)}`}
+                                        {...restProps}
+                                        onClick={() => {
+                                            if (column.canSort) {
+                                                column.toggleSortBy(!column.isSortedDesc);
+                                                updSearchParams({ sortBy: column.id, 
+                                                    sortDirection: column.isSortedDesc ? "ascending" : "descending" });
+                                            }//setSortBy(sortBy);
+                                        }} //column.toggleSortBy(!column.isSortedDesc)}
+                                    >
+                                        {column.render('Header')}
+                                        <span>
+                                            {column.canSort ? (column.isSorted
+                                                ? (column.isSortedDesc
+                                                    ? <CaretDownFill className="text-primary" />
+                                                    : <CaretUpFill className="text-primary" />)
+                                                : <ArrowDownUp className="ms-1 text-primary" size="0.75em" />)
+                                                : ""}
+                                        </span>
+                                    </th>
+                                )
+                            }
+                            )}
+                        </tr>
+                    )
+                }
+                )}
+                <tr>
+                    <th
+                        colSpan={visibleColumns.length}
+                        style={{
+                            textAlign: 'left',
+                        }}
+                    >
+                        {/*
               <GlobalFilter
               preGlobalFilteredRows={preGlobalFilteredRows}
               globalFilter={state.globalFilter}
               setGlobalFilter={setGlobalFilter}
             />
             */}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          ( 
-            rows.length > 0 && rows.map(row => {
-            prepareRow(row);
-            const { key, ...restRowProps } = row.getRowProps();
-            return (
-              <tr {...restRowProps} key={`tr-${Math.random().toString(16).slice(2)}`} >
-                {row.cells.map(cell => {
-                  return (
-                    <td  {...cell.getCellProps()} key={`td-${Math.random().toString(16).slice(2)}`}>
-                      {cell.render('Cell')}
-                    </td>
-                  )
-                })}
-              </tr>
-              )
-            })
-          ) || <TableNoData colSpan={columns.length} message="No datasets found"></TableNoData>
-        }
-      </tbody>
-    </BTable>
-  )
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    (
+                        rows.length > 0 && rows.map(row => {
+                            prepareRow(row);
+                            const { key, ...restRowProps } = row.getRowProps();
+                            return (
+                                <tr {...restRowProps} key={`tr-${Math.random().toString(16).slice(2)}`} >
+                                    {row.cells.map(cell => {
+                                        return (
+                                            <td  {...cell.getCellProps()} key={`td-${Math.random().toString(16).slice(2)}`}>
+                                                {cell.render('Cell')}
+                                            </td>
+                                        )
+                                    })}
+                                </tr>
+                            )
+                        })
+                    ) || <TableNoData colSpan={columns.length} message="No datasets found"></TableNoData>
+                }
+            </tbody>
+        </BTable>
+    )
 }
 
 interface DatasetsMainTableProps {
-  data: SingleDataPageItem[],
-  dataManager: DataManager,
-  postMessage: Function;
-  currentSort: MainTableSortBy;
-  updSearchParams: Function;
-  singleDataType: SingleDataType;
+    data: SingleDataPageItem[],
+    dataManager: DataManager,
+    postMessage: Function;
+    currentSort: MainTableSortBy;
+    updSearchParams: Function;
+    singleDataType: SingleDataType;
 }
 
 function DatasetsMainTable(props: DatasetsMainTableProps): JSX.Element {
-  const sortBy: MainTableSortBy[] = useMemo(() => {return [props.currentSort]}, [props.currentSort]);
-  const columns = useMemo(() => [
-    // {
-    //   Header: 'ID',
-    //   id: "id",
-    //   disableSortBy: true,
-    //   Cell: ({row}) => <ColIdRender  row={row}/> 
-    // },
-    {
-      Header: () => <Fragment>Dataset (<i>version</i>) (<i>ID</i>)</Fragment>,
-      id: "name",
-      accessor: 'name',
-      Cell: ({row}: CellProps<any>) => <ColNameIdRender  row={row}/>
-    },
-    // {
-    //   Header: 'Version',
-    //   id: "version",
-    //   accessor: 'version',
-    //   disableSortBy: true
-    // },
-    {
-      Header: 'Flags',
-      id: "flags",
-      Cell: ({row}: CellProps<any>) => <ColFlagsRender   row={row}/> 
-    },
-    {
-      Header: 'Tags',
-      id: "tags",
-      Cell: ({row}: CellProps<any>) => <ColTagsRender   row={row}/> 
-    },
-    {
-      Header: 'Author',
-      id: "authorName",
-      accessor: 'authorName'
-    },
-    {
-      Header: 'Project',
-      id: "project",
-      accessor: 'project'
-    },
-    {
-      Header: 'Created',
-      id: "creationDate",
-      accessor: 'creationDate',
-      Cell: ({ row }: CellProps<any>) => <ColCreatedRender  row={row}/> 
-    },
-    {
-      Header: 'Studies',
-      id: "studiesCount",
-      accessor: 'studiesCount'
-    },
-    {
-      Header: 'Subjects',
-      id: "subjectsCount",
-      accessor: 'subjectsCount'
-    },
-    {
-      Header: () => <Fragment>Times<br />used</Fragment>,
-      id: "timesUsed",
-      accessor: 'timesUsed'
-    }
-  ], [props]);
+    const sortBy: MainTableSortBy[] = useMemo(() => { return [props.currentSort] }, [props.currentSort]);
+    const columns = useMemo(() => [
+        // {
+        //   Header: 'ID',
+        //   id: "id",
+        //   disableSortBy: true,
+        //   Cell: ({row}) => <ColIdRender  row={row}/> 
+        // },
+        {
+            Header: () => <Fragment>Dataset (<i>version</i>) (<i>ID</i>)</Fragment>,
+            id: "name",
+            accessor: 'name',
+            Cell: ({ row }: CellProps<any>) => <ColNameIdRender  key={`nameid-col-${row.original["id"]}`} row={row} />
+        },
+        // {
+        //   Header: 'Version',
+        //   id: "version",
+        //   accessor: 'version',
+        //   disableSortBy: true
+        // },
+        {
+            Header: 'Flags',
+            id: "flags",
+            Cell: ({ row }: CellProps<any>) => <ColFlagsRender key={`flags-col-${row.original["id"]}`}  row={row} />
+        },
+        {
+            Header: 'Tags',
+            id: "tags",
+            Cell: ({ row }: CellProps<any>) => <ColTagsRender key={`tags-col-${row.original["id"]}`} row={row} />
+        },
+        {
+            Header: 'Author',
+            id: "authorName",
+            accessor: 'authorName'
+        },
+        {
+            Header: 'Project',
+            id: "project",
+            className: styles["colName"],
+            accessor: 'project'
+        },
+        {
+            Header: 'Created',
+            id: "creationDate",
+            accessor: 'creationDate',
+            Cell: ({ row }: CellProps<any>) => <ColCreatedRender row={row} />
+        },
+        {
+            Header: 'Studies',
+            id: "studiesCount",
+            accessor: 'studiesCount'
+        },
+        {
+            Header: 'Subjects',
+            id: "subjectsCount",
+            accessor: 'subjectsCount'
+        },
+        {
+            Header: () => <Fragment>Times<br />used</Fragment>,
+            id: "timesUsed",
+            accessor: 'timesUsed'
+        }
+    ], [props]);
     return <Table singleDataType={props.singleDataType} columns={columns} data={props.data}
-      sortBy={sortBy}
-      updSearchParams={props.updSearchParams}
-      />
+        sortBy={sortBy}
+        updSearchParams={props.updSearchParams}
+    />
 }
 
 export default DatasetsMainTable;

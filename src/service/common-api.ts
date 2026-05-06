@@ -101,17 +101,25 @@ function _call(method: string, path: string,
   
           };
           if (queryParams !== null) {
-            const entr = Object.entries(queryParams);
+            const entr = Object.entries(queryParams).filter(([k,v]) => {
+                return v !== undefined && v !== null && (!Array.isArray(v) || v.length > 0);
+            });
             //let size = entr.length;
-            for (const [k,v] of entr) {
-              if (v === undefined || v === null) {
-                delete queryParams[k];
-                //--size;
-              }
-            }
+            // for (const [k,v] of entr) {
+            //   if (v === undefined || v === null || (Array.isArray(v) && v.length === 0)) {
+            //     delete queryParams[k];
+            //     //--size;
+            //   }
+            // }
             if  (entr.length !== 0)  {
-              path += "?" + Object.entries(queryParams)
-                .map(([k, v]) => encodeURIComponent(k) + "=" + encodeURIComponent(v ?? ""))
+              path += "?" + entr
+                .map(([k, v]) => {
+                    if (Array.isArray(v)) {
+                        return v.map(e => encodeURIComponent(k) + "=" + encodeURIComponent(e)).join("&");
+                    } else {
+                        return encodeURIComponent(k) + "=" + encodeURIComponent(v ?? "");
+                    }
+                })
                 .join("&");
             }
           }

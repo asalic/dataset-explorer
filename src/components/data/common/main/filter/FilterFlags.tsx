@@ -47,7 +47,7 @@ function getFilterFlag(searchParams: URLSearchParams,
         flagName: string, filter: string, updParamsCb: (e: MouseEvent) => void, 
         bg: string, text: string, rmFilterValue: string | null, disabled: boolean) {
     return (
-        <Row xs={1} sm={1} md={1} lg={1} xl={2} xxl={2} title={`Filter datasets that have the flag '${filter}'.`} 
+        <Row key={flagName} xs={1} sm={1} md={1} lg={1} xl={2} xxl={2} title={`Filter datasets that have the flag '${filter}'.`} 
                 className="ms-0 me-0 my-xs-3 my-sm-3 my-md-3 my-lg-3 my-xl-0 my-xxl-0" style={{display: "flex", flexDirection: "row"}}>
             <Col xs={4} style={{display: "flex", flexDirection: "row", alignItems: "center"}} className="ps-2">
                 <Badge pill bg={bg} text={text}>{flagName}</Badge> 

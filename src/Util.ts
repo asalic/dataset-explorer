@@ -121,7 +121,12 @@ export default class Util {
 
   static updSearchParams(params: object, searchParams: URLSearchParams, setSearchParams: Function) {
     for (const [k, v] of Object.entries(params)) {
-      if (v !== null) {
+      if (Array.isArray(v)) {
+        searchParams.delete(k);
+        for (const val of v) {
+            searchParams.append(k, val);
+        }
+      } else if (v !== null) {
         searchParams.set(k, v);
       } else {
         searchParams.delete(k);

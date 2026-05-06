@@ -50,6 +50,7 @@ export default interface SingleData {
     project: string;
     version: string;
     purpose: string;
+    tags: string[];
     /**
      * mapped to property type  coming from the server
      */
