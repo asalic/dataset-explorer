@@ -15,10 +15,10 @@ import { useDeleteSingleDataCreatingMutation, useGetSingleDataQuery,
          usePostSingleDataRecollectMetadataMutation, usePostSingleDataCheckIntegrityMutation } from "../../../../../service/singledata-api";
 import Util from "../../../../../Util";
 import CheckIntegrity from "../../../../../model/CheckIntegrity";
-import config from "../../../../../service/config";
 import DelCancelSingleDataMsg from "../../../../common/DelCancelSingleDataMsg";
 import TabsView from "../../../../common/TabsView";
 import SingleDataTags from "./SingleDataTags";
+import UrlFactory from "../../../../../service/UrlFactory";
 
 
 
@@ -149,7 +149,7 @@ function SingleDataView<T extends SingleData>(props: SingleDataViewProps<T>): JS
 
   useEffect(() => {
     if (deleteIsLoading === false && (deleteError === undefined || deleteError === null) && deleteData) {
-      navigate("/" + config.basename);
+      navigate(UrlFactory.base());
     } 
   }, [deleteIsLoading, deleteError, deleteData ])
 

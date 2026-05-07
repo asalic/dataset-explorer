@@ -9,6 +9,8 @@ import { useKeycloak } from "@react-keycloak/web";
 import { useGetIndexOperationsQuery } from "../../service/singledata-api";
 import ErrorView from "./ErrorView";
 import INDEX_OPERATIONS from "../../model/IndexOperations";
+import UrlFactory from "../../service/UrlFactory";
+import SingleDataType from "../../model/SingleDataType";
 
 
 
@@ -50,11 +52,11 @@ function NavbarView() {
                                 </div>
                             </div>
                         </Navbar.Brand>
-                        <Nav.Link title="List of datasets" href={config.basename + "/datasets"}>Datasets</Nav.Link>
-                        <Nav.Link title="List of models" href={config.basename + "/models"}>Models</Nav.Link>
-                        { data?.includes(INDEX_OPERATIONS.PROJECTS) ? <Nav.Link title="Manage the projects" href={config.basename + "/projects"}>Projects</Nav.Link> : <></>}
-                        { data?.includes(INDEX_OPERATIONS.SITES) ? <Nav.Link title="Manage the sites" href={config.basename + "/sites"}>Sites</Nav.Link> : <></> }
-                        { data?.includes(INDEX_OPERATIONS.USERS) ? <Nav.Link title="Manage the users" href={config.basename + "/users"}>Users</Nav.Link> : <></> }
+                        <Nav.Link title="List of datasets" href={UrlFactory.singleData(SingleDataType.DATASET)}>Datasets</Nav.Link>
+                        <Nav.Link title="List of models" href={UrlFactory.singleData(SingleDataType.MODEL)}>Models</Nav.Link>
+                        { data?.includes(INDEX_OPERATIONS.PROJECTS) ? <Nav.Link title="Manage the projects" href={UrlFactory.projects()}>Projects</Nav.Link> : <></>}
+                        { data?.includes(INDEX_OPERATIONS.SITES) ? <Nav.Link title="Manage the sites" href={UrlFactory.sites()}>Sites</Nav.Link> : <></> }
+                        { data?.includes(INDEX_OPERATIONS.USERS) ? <Nav.Link title="Manage the users" href={UrlFactory.users()}>Users</Nav.Link> : <></> }
                         <NavDropdown title="Documentation" id="documentation-dropdown">
                             <NavDropdown.Item key="Workstation_Usage_Guide" title="Workstation Usage Guide" href={config.externalLinks.workstationUsageGuide} target="_blank">Workstation Usage</NavDropdown.Item>
                             <NavDropdown.Item key="Dataset_Usage_Guide" title="Dataset Usage Guide" href={config.externalLinks.datasetUsageGuide} target="_blank">Dataset Usage</NavDropdown.Item>
@@ -67,9 +69,9 @@ function NavbarView() {
                                 <NavDropdown.Item key="Dataset Service API Specs" title="Dataset Service API Specs" href="https://github.com/chaimeleon-eu/dataset-service#api-usage" target="_blank">API Specs</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item key="Fair Principles" title="Fair Principles" href={config.basename + "/fair"}>Fair Principles</NavDropdown.Item>
+                            <NavDropdown.Item key="Fair Principles" title="Fair Principles" href={UrlFactory.fair()}>Fair Principles</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link target="_blank" title="Support" href={config.basename + "/support"}>Support</Nav.Link>
+                        <Nav.Link target="_blank" title="Support" href={UrlFactory.support()}>Support</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
                 {/* keycloak.authenticated ? <Button className="me-1" variant="warning" onClick={() => window.open("https://forms.gle/bDmJC3cHog2CixMB8", '_blank').focus()}>Internal Validation</Button> : <Fragment/> */}

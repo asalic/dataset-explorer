@@ -15,7 +15,6 @@ import SingleDataFactory from "../../../../api/SingleDataFactory";
 import SingleDataPageItem from "../../../../model/SingleDataPageItem";
 import TagComponent from "../../../common/tag/TagComponent";
 import TagsPopover from "../../../common/tag/TagsPopover";
-import styles from "./MainTable.module.css";
 
 
 // const IndeterminateCheckbox = forwardRef(
@@ -596,7 +595,6 @@ function DatasetsMainTable(props: DatasetsMainTableProps): JSX.Element {
         {
             Header: 'Project',
             id: "project",
-            className: styles["colName"],
             accessor: 'project'
         },
         {

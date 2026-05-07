@@ -14,7 +14,7 @@ export const apiSites = createApi({
   endpoints: (build:  EndpointBuilder<any, any, any>) => ({
     getSites: build.query<Array<SiteShort>, GetSitesT>({
         query: ({token}) => ({
-            url: UrlFactory.sitesList(),
+            url: UrlFactory.sites(),
             headers: {"Authorization": `Bearer ${token}`}
         }),
         providesTags: ["SitesList"],

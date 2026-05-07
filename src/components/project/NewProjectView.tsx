@@ -57,7 +57,7 @@ function NewProjectView({setCreatedSuccessfully}: NewProjectViewProps): JSX.Elem
             if  (submitError) {
                 setSubmitError(null);
             }
-            navigate(UrlFactory.projectsList());
+            navigate(UrlFactory.projects());
             if (setCreatedSuccessfully) {
                 setCreatedSuccessfully(true);
             }
@@ -111,7 +111,7 @@ function NewProjectView({setCreatedSuccessfully}: NewProjectViewProps): JSX.Elem
                 Submit
             </Button>
 
-            <Button variant="secondary"  className="mt-4" onClick={() => navigate(UrlFactory.projectsList())}>
+            <Button variant="secondary"  className="mt-4" onClick={() => navigate(UrlFactory.projects())}>
                 Cancel
             </Button>
         </Form>

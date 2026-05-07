@@ -51,7 +51,7 @@ function SiteForm({site}: SiteFormProps): JSX.Element {
                 site
             }).unwrap();
             if (!isUpdate) {
-                navigate(UrlFactory.sitesList());
+                navigate(UrlFactory.sites());
             }
         } catch (e) {
             console.error(e);
@@ -104,7 +104,7 @@ function SiteForm({site}: SiteFormProps): JSX.Element {
 
             {
                 !isUpdate ? <Button type="button" variant="secondary" className=" mt-4" 
-                            onClick={() => navigate(UrlFactory.sitesList())}>
+                            onClick={() => navigate(UrlFactory.sites())}>
                         Cancel
                     </Button>
                     : null

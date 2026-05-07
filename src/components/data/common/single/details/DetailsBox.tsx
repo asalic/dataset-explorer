@@ -1,4 +1,3 @@
-import RouteFactory from "../../../../../api/RouteFactory";
 import SingleDataType from "../../../../../model/SingleDataType";
 import React, { Fragment } from "react";
 // import DatasetFieldEdit from "../common/DatasetFieldEdit";
@@ -9,6 +8,7 @@ import CollectionMethodType from "../../../../../model/CollectionMethodType";
 import GenericFieldEdit from "../../../../common/fieldedit/GenericFieldEdit";
 import { usePatchSingleDataMutation } from "../../../../../service/singledata-api";
 import BodyFactorySpecType from "../../../../../model/BodyFactorySpecType";
+import UrlFactory from "../../../../../service/UrlFactory";
 
 
 const PREVIOUS_ID = "Previous version";
@@ -53,7 +53,7 @@ function getIDLink(singleDataId: string, singleDataType: SingleDataType,
   if (id || canEdit) {
     return <p title={`ID of the ${text} version of this dataset`}><b>{text}</b>
           { getIdEdit(singleDataId, singleDataType, text, data, showDialog, keycloakReady) }<br />
-          <span className="ms-3">{ id ? <a href={RouteFactory.getPath(RouteFactory.DATASET_DETAILS, { datasetId: id } )}>{id}</a> : "-" }</span>
+          <span className="ms-3">{ id ? <a href={UrlFactory.singleDataDetails(id, SingleDataType.DATASET)}>{id}</a> : "-" }</span>
         </p>;
   } else {
     return <Fragment />
