@@ -11,7 +11,6 @@ interface TagsPopoverProps {
 
 
 export default function TagsPopover({ show, setShow, tags, targetRef  }: TagsPopoverProps): JSX.Element {
-  console.log(show);
 
   return <Overlay
             target={targetRef}

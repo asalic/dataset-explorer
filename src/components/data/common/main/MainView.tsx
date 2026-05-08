@@ -110,7 +110,6 @@ function MainView(props: MainViewProps) {
 
       useEffect(() => {
         if (searchParams.get("invalidated") === null) {
-          console.log("update");
           updSearchParams({invalidated: "false"})
         }
 

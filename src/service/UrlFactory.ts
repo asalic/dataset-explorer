@@ -80,7 +80,7 @@ export default class UrlFactory {
     public static queryParams(qps?: UrlTags): string {
         if (qps) { 
             let qpA = [];
-            for (const [k, v] of Object.values(qps)) {
+            for (const [k, v] of Object.entries(qps)) {
                 qpA.push(`${k}=${v}`);
             }
             return `?${qpA.join("&")}`;
