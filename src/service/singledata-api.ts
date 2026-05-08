@@ -2,9 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { EndpointBuilder } from "@reduxjs/toolkit/query";
 //import QueryParamsType from '../model/QueryParamsType';
 import ItemPage from '../model/ItemPage';
-import QueryParamsType from '../model/QueryParamsType';
 import { call, BASE_URL_API, generateError } from "./common-api";
-import SingleDataType from "../model/SingleDataType";
 import SingleData from '../model/SingleData';
 import Util from '../Util';
 import DatasetCreationStatus from '../model/DatasetCreationStatus';
@@ -17,15 +15,13 @@ import SingleDataFactory from '../api/SingleDataFactory';
 import Project from '../model/project/Project';
 import ProjectConfig from '../model/project/ProjectConfig';
 import ProjectList from '../model/project/ProjectList';
-import { ProjectFull } from '../model/project/ProjectFull';
 import User from '../model/user/User';
-import UserUpdate from '../model/user/UserUpdate';
 import ManagementJob from '../model/ManagementJob';
 import UserListItem from '../model/user/UserListItem';
 import SubprojectList from '../model/project/SubprojectList';
-import Subproject from '../model/project/Subproject';
 import SingleDataPageItem from '../model/SingleDataPageItem';
 import INDEX_OPERATIONS from '../model/IndexOperations';
+import type { DeleteSingleDataAclT, DeleteSingleDataCreatingT, GetDatasetCreationStatusT, GetIndexOperations, GetLicensesT, GetProjectConfigT, GetProjectsT, GetProjectT, GetSingleDataAclT, GetSingleDataPageT, GetSingleDataT, GetSubprojectsT, GetUpgradableDatasetsT, GetUserManagementJobLogsT, GetUserManagementJobsT, GetUserRolesT, GetUserSitesT, GetUsersPageT, GetUserT, PatchProjectT, PatchSingleDataT, PostSingleDataCheckIntegrityT, PostSingleDataReadjustFilePermissionsT, PostSingleDataRecollectMetadataT, PostSingleDataRestartCreationT, PutProjectConfigT, PutProjectLogoT, PutProjectT, PutSingleDataAclT, PutSubprojectT, PutUserT } from './singledata-api-types';
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '' }),
@@ -139,7 +135,7 @@ export const api = createApi({
         invalidatesTags: ["ModelAcl", "DatasetAcl"],
     }),
     putSingleDataAcl: build.mutation<boolean, PutSingleDataAclT>({
-      queryFn: async ({token, id, singleDataType, username}: DeleteSingleDataAclT)  => 
+      queryFn: async ({token, id, singleDataType, username}: PutSingleDataAclT)  => 
         {
           try {
             const headers = new Map();
@@ -337,6 +333,7 @@ export const api = createApi({
             invalidatesTags: ["ProjectConfig"],
         }),
 
+
     getProjects: build.query<ProjectList | Array<string>, GetProjectsT>({
         queryFn: async ({token, purpose}: GetProjectsT)  => 
           {
@@ -530,173 +527,6 @@ export const api = createApi({
   }),
 })
 
-interface GetIndexOperations {
-  token: string  | null |undefined;    
-}
-
-
-interface GetSingleDataPageT {
-  token: string  | null |undefined;
-  qParams:  QueryParamsType;
-  singleDataType: SingleDataType;
-}
-
-interface GetSingleDataT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-}
-
-interface GetSingleDataAclT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-}
-
-interface DeleteSingleDataAclT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-  username: string;
-}
-
-interface PutSingleDataAclT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-  username: string;
-}
-
-interface PostSingleDataRestartCreationT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-}
-interface PostSingleDataReadjustFilePermissionsT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-}
-interface PostSingleDataRecollectMetadataT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-}
-interface PostSingleDataCheckIntegrityT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-}
-interface DeleteSingleDataCreatingT {
-  token: string  | null |undefined;
-  id:  string;
-  singleDataType: SingleDataType;
-  name: string;
-}
-
-interface GetDatasetCreationStatusT {
-  token: string  | null |undefined;
-  id:  string;
-
-}
-
-interface PatchSingleDataT {
-  token: string | null | undefined;
-  id: string;
-  property: string;
-  value: string | boolean | null;
-  singleDataType: SingleDataType;
-}
-
-interface GetUpgradableDatasetsT {
-  token: string | null | undefined;
-}
-
-interface GetLicensesT {
-  token: string | null | undefined;
-}
-
-interface PutProjectT {
-    projectFull: ProjectFull;
-    token: string;
-}
-
-interface PutProjectConfigT {
-    projectConfig: ProjectConfig;
-    token: string;
-    code: string;
-}
-
-interface GetProjectsT {
-    token: string | null | undefined;
-    purpose: string;
-}
-
-interface GetProjectT {
-    token: string | null | undefined;
-    code: string;
-}
-
-interface GetProjectConfigT {
-    token: string | null | undefined;
-    code: string;
-}
-
-interface PatchProjectT {
-    token: string | null | undefined;
-    code: string;
-    property: string;
-    value: string | boolean | null;
-}
-
-interface GetSubprojectsT {
-    token: string | null | undefined;
-    code: string;
-
-}
-
-interface PutSubprojectT {
-    partialSubproject: Partial<Subproject>;
-    code: string;
-    subcode: string;
-    token: string;
-}
-
-
-interface GetUsersPageT {
-  token: string  | null | undefined;
-  qParams:  QueryParamsType;
-}
-
-interface GetUserT {
-  token: string | null | undefined;
-  username: string;
-}
-
-interface PutUserT {
-  user: UserUpdate;
-  token: string;
-  username: string;
-}
-
-interface GetUserSitesT {
-  token: string | null | undefined;
-}
-
-interface GetUserRolesT {
-  token: string | null | undefined;
-}
-
-interface GetUserManagementJobsT {
-  token: string | null | undefined;
-  username: string;
-}
-
-interface GetUserManagementJobLogsT {
-  token: string | null | undefined;
-  username: string;
-  selectorUid: string;
-}
 
 export const { 
   useGetIndexOperationsQuery,
