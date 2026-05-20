@@ -9,36 +9,57 @@ export default class Util {
   static RELEASE_PROD = "prod";
   static RELEASE_PROD_EUCAIM = "prod-eucaim";
   static RELEASE_PROD_TEST_EUCAIM = "prod-test-eucaim";
-  static RELEASE_PROD_TEST= "prod-test";
+  static RELEASE_PROD_TEST = "prod-test";
   static RELEASE_MINI_NODE = "mini-node";
   static RELEASE_UNDEFINED = undefined;
 
-  static  isError(e: any): boolean {
-    return e && 
-           e.stack && 
-           e.message && 
-           typeof e.stack === 'string' && 
-           typeof e.message === 'string';
-   };
+  static isError(e: any): boolean {
+    return e &&
+      e.stack &&
+      e.message &&
+      typeof e.stack === 'string' &&
+      typeof e.message === 'string';
+  };
 
-  static getError(error: any): Error  {
-    console.log(error);
-    if (Util.isError(error)) {
-      return error;
-    } else if (error.message) {
-        return new Error(error.message, { cause: error });      
+  static getError(errorRaw: any): Error {
+    if (Util.isError(errorRaw)) {
+      return errorRaw;
+    }
+
+    let errorProc = errorRaw;
+    if ("data" in errorRaw) {
+      errorProc = errorRaw.data;
+    }
+
+    console.log(errorProc);
+    let error = null;
+    if (typeof errorProc === "string") {
+      try {
+        error = JSON.parse(errorProc);
+      } catch (e) {
+        console.error(e);
+        return new Error(errorProc);
+      }
+    } else if (typeof errorProc === "object") {
+      error = errorProc;
+    } else {
+      return new Error(String(errorProc), { cause: error });
+    }
+
+    if (error.message) {
+      return new Error(error.message, { cause: error });
     } else if (error.data) {
-        if (typeof error.data === "object") {
-            return new Error(JSON.stringify(error.data), { cause: error });
-        } else {
-            return new Error(String(error.data), { cause: error });
-        }
+      if (typeof error.data === "object") {
+        return new Error(JSON.stringify(error.data), { cause: error });
+      } else {
+        return new Error(String(error.data), { cause: error });
+      }
     } else if ("error" in error) {
-        if ("error" in error.error) {
-            return new Error(String(error.error.error), { cause: error });
-        } else {
-            return new Error(String(error.error), { cause: error });
-        }
+      if (typeof error.error === "object" && "error" in error.error) {
+        return new Error(String(error.error.error), { cause: error });
+      } else {
+        return new Error(String(error.error), { cause: error });
+      }
     } else {
       return new Error("An unknown error has occured", { cause: error })
     }
@@ -49,11 +70,11 @@ export default class Util {
     let text: string | null = null;
     if (!xhr.responseText) {
       if (xhr.statusText !== undefined && xhr.statusText !== null) {
-          title = xhr.statusText;
-          text = "Error loading data from " + xhr.responseURL;
+        title = xhr.statusText;
+        text = "Error loading data from " + xhr.responseURL;
       } else {
         title = "Error";
-        text =  "Error loading data from " + xhr.responseURL;
+        text = "Error loading data from " + xhr.responseURL;
       }
     } else {
       try {
@@ -72,32 +93,32 @@ export default class Util {
 
   static parseK8sNames(uNameKeycloak: string, truncate: boolean) {
     let uNameKube: string | null = uNameKeycloak.toLowerCase()
-      .replaceAll("_","--").replaceAll("@","-at-")
-      .replaceAll(".","-dot-").replaceAll('"', '' )
-      .replaceAll('\\', '' ).replaceAll('..', '')
-      .replaceAll('%', '-perc-').replaceAll(" ","");
+      .replaceAll("_", "--").replaceAll("@", "-at-")
+      .replaceAll(".", "-dot-").replaceAll('"', '')
+      .replaceAll('\\', '').replaceAll('..', '')
+      .replaceAll('%', '-perc-').replaceAll(" ", "");
     if (truncate) {
       let start = 0
       let end = uNameKube.length - 1
       while (!uNameKube.charAt(start).match(/^[0-9a-z]+$/) && start < end) {
-          start += 1 ;
+        start += 1;
       }
       while (!uNameKube.charAt(end).match(/^[0-9a-z]+$/) && end > start) {
-          end -= 1;
+        end -= 1;
       }
       if (start === end) {
-          console.error(`parse_k8s_names -> Cannot convert ${uNameKube} to a valid name to k8s`);
-          uNameKube = null;
-      } else {  
+        console.error(`parse_k8s_names -> Cannot convert ${uNameKube} to a valid name to k8s`);
+        uNameKube = null;
+      } else {
         uNameKube = uNameKube.substring(start, end + 1);
       }
     }
-  
+
     if (uNameKube && uNameKube.length >= 63) {
       uNameKube = uNameKube.substring(0, 63);
     }
     return uNameKube;
-  
+
   }
 
   static getUserKubeNamespace(userName: string | null) {
@@ -124,7 +145,7 @@ export default class Util {
       if (Array.isArray(v)) {
         searchParams.delete(k);
         for (const val of v) {
-            searchParams.append(k, val);
+          searchParams.append(k, val);
         }
       } else if (v !== null) {
         searchParams.set(k, v);
@@ -140,11 +161,11 @@ export default class Util {
     const seconds = Math.floor((duration / 1000) % 60);
     const minutes = Math.floor((duration / (1000 * 60)) % 60);
     const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-  
+
     const shours = (hours < 10) ? "0" + hours : hours;
     const sminutes = (minutes < 10) ? "0" + minutes : minutes;
     const sseconds = (seconds < 10) ? "0" + seconds : seconds;
-  
+
     return shours + ":" + sminutes + ":" + sseconds;
   }
 
@@ -158,7 +179,7 @@ export default class Util {
     const i = Math.floor(Math.log(bytes) / Math.log(k))
 
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
-}
+  }
 
   static popPath(path: string): string {
     let pS = path.split("/");
@@ -167,7 +188,7 @@ export default class Util {
   }
 
   public static singleDataPath(type: SingleDataType) {
-   return Util.singleDataClassName(type).toLowerCase() + "s";
+    return Util.singleDataClassName(type).toLowerCase() + "s";
   }
 
   public static singleDataClassName(type: SingleDataType): string {
@@ -181,17 +202,29 @@ export default class Util {
 
   public static isJson(input: any): boolean {
     try {
-        //check if the string exists
-        if (input) {
-            JSON.parse(input);
-            return true;
-        } else {
-          return false;
-        }
+      //check if the string exists
+      if (input) {
+        JSON.parse(input);
+        return true;
+      } else {
+        return false;
+      }
     }
     catch (e: any) {
       return false;
     }
   };
+
+  static isValidUrl(url: any): boolean {
+    if (typeof url !== "string" && !(url instanceof URL)) {
+      return false;
+    }
+    try {
+      new URL(url);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
 }
