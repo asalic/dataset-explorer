@@ -9,6 +9,7 @@ import GenericFieldEdit from "../../../../common/fieldedit/GenericFieldEdit";
 import { usePatchSingleDataMutation } from "../../../../../service/singledata-api";
 import BodyFactorySpecType from "../../../../../model/BodyFactorySpecType";
 import UrlFactory from "../../../../../service/UrlFactory";
+import { Link } from "react-router-dom";
 
 
 const PREVIOUS_ID = "Previous version";
@@ -53,7 +54,7 @@ function getIDLink(singleDataId: string, singleDataType: SingleDataType,
   if (id || canEdit) {
     return <p title={`ID of the ${text} version of this dataset`}><b>{text}</b>
           { getIdEdit(singleDataId, singleDataType, text, data, showDialog, keycloakReady) }<br />
-          <span className="ms-3">{ id ? <a href={UrlFactory.singleDataDetails(id, SingleDataType.DATASET)}>{id}</a> : "-" }</span>
+          <span className="ms-3">{ id ? <Link to={UrlFactory.singleDataDetails(id, SingleDataType.DATASET)}>{id}</Link> : "-" }</span>
         </p>;
   } else {
     return <Fragment />

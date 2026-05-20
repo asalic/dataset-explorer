@@ -8,6 +8,7 @@ import { api, useGetDatasetCreationStatusQuery } from "../../../../../service/si
 import UrlFactory from "../../../../../service/UrlFactory";
 import SingleDataType from "../../../../../model/SingleDataType";
 import config from "../../../../../service/config";
+import { Link } from "react-router-dom";
 
 // const MSG_INVALIDATED = 1;
 // const MSG_NEXT_ID = 2;
@@ -30,14 +31,12 @@ function MessageBox<T extends SingleData>({keycloakReady, dataset}: MessageBox<T
         skip: !(dataset && dataset.draft  && keycloakReady && dataset.creating),
         pollingInterval
     });
-    const msgs = [];
+    const msgs: Array<string | JSX.Element> = [];
     if (dataset.invalidated) {
         msgs.push("This dataset has been invalidated.");
     }
     if (dataset.nextId) {
-        const path = UrlFactory.singleDataDetails(dataset.nextId, SingleDataType.DATASET); 
-        msgs.push(`There is a newer version for this dataset, 
-            <a href="${path}">${dataset.nextId}</a>`);
+        msgs.push(<>There is a newer version for this dataset <Link to={UrlFactory.singleDataDetails(dataset.nextId, SingleDataType.DATASET)}>{dataset.nextId}</Link></>);
 
     }
     if (!isLoading && !error && data ) {
@@ -118,7 +117,7 @@ function MessageBox<T extends SingleData>({keycloakReady, dataset}: MessageBox<T
                     <Alert variant="warning">
                             <ul>
                                 {
-                                    Object.values(msgs).map((m: string) => <li key={m} dangerouslySetInnerHTML={{ __html: m }}></li>)
+                                    msgs.map((v: string | JSX.Element, idx: number) => <li key={idx}>{v}</li>)
                                 }
                             </ul>
                         </Alert>
