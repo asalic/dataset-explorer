@@ -10,6 +10,7 @@ import BodyEnumSelect from "../../data/common/single/common/fieldedit/BodyEnumSe
 import CollectionMethodType from "../../../model/CollectionMethodType";
 import { BodyRTE } from "../../data/common/single/common/fieldedit/BodyRTE";
 import BodyTags from "../../data/common/single/common/fieldedit/BodyTags";
+import BodyProjectLogo from "../../data/common/single/common/fieldedit/BodyProjectLogo";
 
 function bodyFactory(spec: BodyFactorySpecType, field:string, updValue: Function,
         oldValue: any, keycloakReady: boolean, additionalProps?: any): JSX.Element {
@@ -20,6 +21,8 @@ function bodyFactory(spec: BodyFactorySpecType, field:string, updValue: Function
             return <Body oldValue={oldValue} updValue={updValue} inputType="input-url"/>
         } if (field === "shortDescription")  {
             return <Body oldValue={oldValue} updValue={updValue} inputType="textarea"/>
+        } else if (field === "logoUrl") {
+            return <BodyProjectLogo updValue={updValue}/>;
         } else {
             return <Body oldValue={oldValue} updValue={updValue} />
         }
@@ -39,7 +42,7 @@ function bodyFactory(spec: BodyFactorySpecType, field:string, updValue: Function
                                    oldValue={oldValue} allValues={Object.values(CollectionMethodType)}/>;
         } else if (field === "description") {
             return <BodyRTE updValue={updValue} oldValue={oldValue}/>;
-        } else if (field === "description" || field === "provenance" || field === "purpose") {
+        } else if (field === "provenance" || field === "purpose") {
             return <Body updValue={updValue} oldValue={oldValue} inputType="textarea"/>;
         }  else if (field === "tags") {
             return <BodyTags updValue={updValue} oldValue={oldValue}/>;

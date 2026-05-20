@@ -12,94 +12,93 @@ import bodyFactory from "./bodyFactory";
 import BodyFactorySpecType from "../../../model/BodyFactorySpecType";
 
 interface GenericFieldEditProps {
-  oldValue: any;
-  field: string;
-  keycloakReady: boolean;
-  fieldDisplay: string;
-  showDialog: Function;
-  patchMutation: any;
-  patchExternalFields?: object;
-  spec: BodyFactorySpecType;
-  additionalBodyProps?: any;
-  children?: React.ReactNode;
+    oldValue: any;
+    field: string;
+    keycloakReady: boolean;
+    fieldDisplay: string;
+    showDialog: Function;
+    patchMutation: Function;
+    patchExternalFields?: object;
+    spec: BodyFactorySpecType;
+    additionalBodyProps?: any;
+    children?: React.ReactNode;
 }
 
 
 function GenericFieldEdit(props: GenericFieldEditProps): JSX.Element {
-  const [patchSingleData, {isError: isPatchError, isLoading: isPatchLoading, error: patchError } ] 
-    = props.patchMutation();
-  let [value, setValue] = useState<any>(props.oldValue);
-  useEffect(() => setValue(props.oldValue), [props.oldValue]);
-   let { keycloak } = useKeycloak();
+    const [patchSingleData, { isError: isPatchError, isLoading: isPatchLoading, error: patchError }]
+        = props.patchMutation();
+    let [value, setValue] = useState<any>(props.oldValue);
+    useEffect(() => setValue(props.oldValue), [props.oldValue]);
+    let { keycloak } = useKeycloak();
 
 
-  //console.log(`props.oldValue is ${JSON.stringify(props.oldValue)}`);
-  //console.log(`dfe value is ${JSON.stringify(value)}`);
-  const [isPatchValue, setIsPatchValue] = useState(false);
-  const updValue = (newVal: any) => {setValue(newVal);};
-  const patchDataset = () => {
-    setIsPatchValue(true);
-   
-  }
-  useEffect(() => {
-    if (isPatchValue) {
-        patchSingleData({
-          token: keycloak.token,
-          //id: props.singleDataId, 
-          property: SingleDataFactory.apiFieldName(props.field), 
-          value, 
-          ...(props.patchExternalFields) && {...props.patchExternalFields}
-          //singleDataType: props.singleDataType
-        });
-        setIsPatchValue(false);
-      //props.patchDataset(keycloak.token, props.datasetId, props.field, sVal);
-     
+    //console.log(`props.oldValue is ${JSON.stringify(props.oldValue)}`);
+    //console.log(`dfe value is ${JSON.stringify(value)}`);
+    const [isPatchValue, setIsPatchValue] = useState(false);
+    const updValue = (newVal: any) => { setValue(newVal); };
+    const patchDataset = () => {
+        setIsPatchValue(true);
+
     }
-  }, [isPatchValue, setIsPatchValue, patchSingleData, value, keycloak, props]);
+    useEffect(() => {
+        if (isPatchValue) {
+            patchSingleData({
+                token: keycloak.token,
+                //id: props.singleDataId, 
+                property: SingleDataFactory.apiFieldName(props.field),
+                value,
+                ...(props.patchExternalFields) && { ...props.patchExternalFields }
+                //singleDataType: props.singleDataType
+            });
+            setIsPatchValue(false);
+            //props.patchDataset(keycloak.token, props.datasetId, props.field, sVal);
 
-  useEffect(() => {
-    // if (isPatchValue) {
-      // if (!isPatchLoading && !isPatchError) {        
-      //   Dialog.HANDLE_CLOSE();
-      // }
-      if (!isPatchLoading) {
-        setIsPatchValue(false);
-        if (isPatchError) {
-          Dialog.BODY_MESSAGE(new Message(Message.ERROR, "Update error", Util.getError(patchError).message));
-        } else {
-          Dialog.HANDLE_CLOSE();
         }
-        
-      } else {
-        Dialog.BODY_MESSAGE(new Message(Message.INFO, "Updating, please wait..."));
-      }
-      
-    //}
-  }, [isPatchError, isPatchLoading, patchError, Dialog.HANDLE_CLOSE]);
-  // console.log(patchStatus);
-  // const patchDatasetCb = (newData) => setData( prevValues => {
-  //    return { ...prevValues, data: newData.data, isLoading: newData.isLoading, isLoaded: newData.isLoaded, error: newData.error, status: newData.status}}
-  //  );
-  
-  
-  return <Button title={`Edit field '${props.fieldDisplay}'`} variant="link" className="m-0 ms-1 me-1 p-0" onClick={() =>
-      {
+    }, [isPatchValue, setIsPatchValue, patchSingleData, value, keycloak, props]);
+
+    useEffect(() => {
+        // if (isPatchValue) {
+        // if (!isPatchLoading && !isPatchError) {        
+        //   Dialog.HANDLE_CLOSE();
+        // }
+        if (!isPatchLoading) {
+            setIsPatchValue(false);
+            if (isPatchError) {
+                Dialog.BODY_MESSAGE(new Message(Message.ERROR, "Update error", Util.getError(patchError).message));
+            } else {
+                Dialog.HANDLE_CLOSE();
+            }
+
+        } else {
+            Dialog.BODY_MESSAGE(new Message(Message.INFO, "Updating, please wait..."));
+        }
+
+        //}
+    }, [isPatchError, isPatchLoading, patchError, Dialog.HANDLE_CLOSE]);
+    // console.log(patchStatus);
+    // const patchDatasetCb = (newData) => setData( prevValues => {
+    //    return { ...prevValues, data: newData.data, isLoading: newData.isLoading, isLoaded: newData.isLoaded, error: newData.error, status: newData.status}}
+    //  );
+
+
+    return <Button title={`Edit field '${props.fieldDisplay}'`} variant="link" className="m-0 ms-1 me-1 p-0" onClick={() => {
         props.showDialog({
-          show: true,
-          footer: <Footer updValue={updValue} patch={patchDataset} oldValue={props.oldValue} />,
-          body: bodyFactory(props.spec, props.field, updValue, 
-            props.oldValue, props.keycloakReady, props.additionalBodyProps),
-          title: <span>Edit <b>{props.fieldDisplay}</b></span>,
-          size: DialogSize.SIZE_LG,
-          onBeforeClose: null
+            show: true,
+            footer: <Footer updValue={updValue} patch={patchDataset} oldValue={props.oldValue} />,
+            body: bodyFactory(props.spec, props.field, updValue,
+                props.oldValue, props.keycloakReady, props.additionalBodyProps),
+            title: <span>Edit <b>{props.fieldDisplay}</b></span>,
+            size: DialogSize.SIZE_LG,
+            onBeforeClose: null
         });
         //patchDataset(props.field, props.newValue, props.succUpdCb);
-      }} >
-    <PencilFill />
-    {
-        props.children
-    }
-  </Button>
+    }} >
+        <PencilFill />
+        {
+            props.children
+        }
+    </Button>
 }
 
 export default GenericFieldEdit;

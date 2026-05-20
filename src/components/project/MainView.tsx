@@ -29,7 +29,6 @@ function MainView({keycloakReady}: MainViewProps): JSX.Element {
     const canCreateProj = data !== undefined && "allowedActionsForTheUser" in data ? 
             data.allowedActionsForTheUser.includes("create")
         :  false;
-    console.log(data);
     return <div className="d-flex flex-column p-2 w-100">
 
         {

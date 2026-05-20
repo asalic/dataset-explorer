@@ -102,6 +102,12 @@ export interface PutProjectConfigT {
     code: string;
 }
 
+export interface PutProjectLogoT {
+    token: string;
+    code: string;
+    logo: File | null;
+}
+
 export interface GetProjectsT {
     token: string | null | undefined;
     purpose: string;
