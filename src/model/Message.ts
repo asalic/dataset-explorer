@@ -11,10 +11,10 @@ export default class Message {
   
 
   protected _type: string;
-  protected _title: string;
+  protected _title: string | null | undefined;
   protected _message: string | null | undefined;
 
-  constructor(type: string, title: string, message?: string | null) {
+  constructor(type: string, title?: string | null, message?: string | null) {
     this._type = type;
     this._title = title;
     this._message = message;
