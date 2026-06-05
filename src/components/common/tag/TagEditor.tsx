@@ -9,9 +9,10 @@ interface TagEditorProps {
     addTag: Function;
     deleteTags: Function;
     oneCol: boolean;
+    className?: string;
 }
 
-export default function TagEditor({ existingTags, addTag, deleteTags, oneCol }: TagEditorProps): JSX.Element {
+export default function TagEditor({ existingTags, addTag, deleteTags, oneCol, className }: TagEditorProps): JSX.Element {
 
     const [tagNew, setTagNew] = useState<string>("");
     const tagExists = () => existingTags.includes(tagNew);
@@ -24,7 +25,7 @@ export default function TagEditor({ existingTags, addTag, deleteTags, oneCol }: 
         setTagNew("");
     }
 
-    return <Container fluid className="p-0 ms-2 me-2">
+    return <Container fluid className={`p-0 ms-2 me-2 ${className ?? ""}`}>
         <div className={`d-flex gap-2 ${oneCol ? "flex-column" : ""}`}>
             <div className="d-flex flex-column flex-grow-1">
                 <div className={styles["inputWrapper"]}>
@@ -36,9 +37,10 @@ export default function TagEditor({ existingTags, addTag, deleteTags, oneCol }: 
                     Tag already exists.
                 </div>
             </div>
-            <div className="d-flex align-self-start gap-2">
-                <Button size="sm" variant="primary" onClick={() => addTagLocal(tagNew)} disabled={tagExists() || tagNew.length === 0}>Add</Button>
-                <Button size="sm" variant="danger" disabled={existingTags.length === 0}
+            <div className="d-flex align-items-start gap-2">
+                <Button title="Add new tag to the list" size="sm" variant="primary" onClick={() => addTagLocal(tagNew)} 
+                    disabled={tagExists() || tagNew.length === 0}>Add</Button>
+                <Button title="Remove all tags from the list" size="sm" variant="danger" disabled={existingTags.length === 0}
                     onClick={() => deleteTags(new Set([...existingTags]))}>Remove all</Button>
             </div>
         </div>
