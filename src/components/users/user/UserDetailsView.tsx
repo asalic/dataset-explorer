@@ -8,7 +8,6 @@ import { useGetUserQuery, usePutUserMutation, useGetUserSitesQuery, useGetUserRo
   from "../../../service/singledata-api";
 import Util from "../../../Util";
 import UrlFactory from "../../../service/UrlFactory";
-import GetProjectsPurpose from "../../../model/project/GetProjectsPurpose";
 import MultiSelect from "../../common/MultiSelect";
 import { UserAttributeGroup, UserAttribute } from "../../../model/user/User";
 
@@ -30,7 +29,7 @@ export default function UserDetailsView(props: UserDetailsViewProps) {
 
   const {data: allProjects, isLoading: isLoadingProjects, error: errorProjects, isError: isErrorProjects} = 
     useGetProjectsQuery({ token: keycloak.token,
-                          purpose: GetProjectsPurpose.USER_MANAGEMENT },
+                          purpose: "userManagement" },
                         { skip: !keycloak.token });
 
   // const [localUser, setLocalUser] = useState<UserUpdate>({});

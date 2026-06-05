@@ -59,7 +59,13 @@ function BodyId(props: BodyIdProps) {
     const [selectedOption, setSelectedOption] = useState<SelOpt | null>(null);
     const { keycloak } = useKeycloak();
 
-    const { data, isLoading, error, isError } = useGetUpgradableDatasetsQuery({token: keycloak.token});
+    const { data, isLoading, error, isError } = useGetUpgradableDatasetsQuery({
+        token: keycloak.token ?? "", 
+        project: props.additionalProps?.projectCode
+    }, 
+    {
+        skip: keycloak.token === undefined || !keycloak.authenticated
+    });
 
     const updSelectedOption = useCallback((newVal: SingleValue<SelOpt>, action?:  ActionMeta<SelOpt> | null) => {
         if (action && action.action === "clear") {

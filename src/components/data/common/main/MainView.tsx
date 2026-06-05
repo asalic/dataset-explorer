@@ -1,10 +1,10 @@
-import React, { useEffect, useCallback }from 'react';
-import { Container,  Alert} from 'react-bootstrap';
+import React, { useEffect, useCallback } from 'react';
+import { Container, Alert } from 'react-bootstrap';
 import { useKeycloak } from '@react-keycloak/web';
 import { useSearchParams } from "react-router-dom";
 
 //import Message from "../../../../model/Message";
-import SearchComponent from  "../../../common/SearchComponent";
+import SearchComponent from "../../../common/SearchComponent";
 import MainTable from "./MainTable";
 import config from "../../../../service/config";
 import FilteringView from '../../../data/common/main/filter/FilteringView';
@@ -17,6 +17,7 @@ import Util from '../../../../Util';
 import { useDeleteSingleDataCreatingMutation, useGetSingleDataPageQuery } from "../../../../service/singledata-api";
 import SingleDataType from '../../../../model/SingleDataType';
 import DelCancelSingleDataMsg from '../../../common/DelCancelSingleDataMsg';
+import NewSingleData from './NewSingleData';
 
 
 function getSortDirectionDesc(searchParam?: string | null, sortBy?: string | null): string {
@@ -30,10 +31,10 @@ function getSortDirectionDesc(searchParam?: string | null, sortBy?: string | nul
       case "authorName": searchParam = "ascending"; break;
       case "creationDate":
       case "studiesCount":
-      case "subjectsCount": searchParam =  "descending"; break;
-      default: console.warn(`Column ${sortBy} not handled when sort dir not set`); searchParam =  "descending"; 
+      case "subjectsCount": searchParam = "descending"; break;
+      default: console.warn(`Column ${sortBy} not handled when sort dir not set`); searchParam = "descending";
     }
-  } 
+  }
   return searchParam;// === "ascending" ? false : true;
 }
 
@@ -61,7 +62,7 @@ function MainView(props: MainViewProps) {
   //   statusCode: -1
   // });
 
-  const updSearchParams = useCallback((params: Object) => Util.updSearchParams(params, searchParams, setSearchParams), 
+  const updSearchParams = useCallback((params: Object) => Util.updSearchParams(params, searchParams, setSearchParams),
     [searchParams, setSearchParams]);
   const searchStringTmp: string | null = searchParams.get("searchString");
   const searchString: string = searchStringTmp ? decodeURIComponent(searchStringTmp) : "";
@@ -70,18 +71,18 @@ function MainView(props: MainViewProps) {
   const skip: number = searchParams.get("skip") ? Number(searchParams.get("skip")) : 0;
   const limit: number = searchParams.get("limit") ? Number(searchParams.get("limit")) : config.defaultLimitDatasets;
   const tag: string[] = searchParams.getAll("tag");
-  
+
   const onSkipChange = useCallback((skip: number) => {
-    updSearchParams({skip: skip === 0 ? null : skip});
+    updSearchParams({ skip: skip === 0 ? null : skip });
   }, [searchString, sortBy, sortDirection, skip, limit, updSearchParams, searchParams, setSearchParams]);
 
-  const filterUpdate = useCallback((params: Object) => updSearchParams({...params, skip: null}),
+  const filterUpdate = useCallback((params: Object) => updSearchParams({ ...params, skip: null }),
     [skip, updSearchParams]);
 
-  const searchStringUpdate = useCallback((searchString: string | null) => updSearchParams({searchString, skip: null}),
+  const searchStringUpdate = useCallback((searchString: string | null) => updSearchParams({ searchString, skip: null }),
     [skip, updSearchParams]);
 
-  const [ , { data: deleteData } ] = useDeleteSingleDataCreatingMutation({
+  const [, { data: deleteData }] = useDeleteSingleDataCreatingMutation({
     fixedCacheKey: "deleteSingleDataCreating"
   });
 
@@ -103,121 +104,125 @@ function MainView(props: MainViewProps) {
   // }, [location]);
 
 
-      //const data = [{name: "A", version: "1.0", created: "2021-08-09Z08:03:0000"}];
+  //const data = [{name: "A", version: "1.0", created: "2021-08-09Z08:03:0000"}];
 
 
-      //console.log(keycloak);
+  //console.log(keycloak);
 
-      useEffect(() => {
-        if (searchParams.get("invalidated") === null) {
-          updSearchParams({invalidated: "false"})
-        }
+  useEffect(() => {
+    if (searchParams.get("invalidated") === null) {
+      updSearchParams({ invalidated: "false" })
+    }
 
-      }, [searchParams, setSearchParams, updSearchParams]);
+  }, [searchParams, setSearchParams, updSearchParams]);
 
-      const invalidated = searchParams.get("invalidated") === "" ? null : searchParams.get("invalidated");
+  const invalidated = searchParams.get("invalidated") === "" ? null : searchParams.get("invalidated");
 
-      const {data, isError, error, isLoading} = useGetSingleDataPageQuery(
+  const { data, isError, error, isLoading } = useGetSingleDataPageQuery(
+    {
+      token: keycloak.token,
+      qParams: {
+        skip, limit, searchString, sortBy, sortDirection, tag: [...tag],
+        ...(searchParams.get("project") !== null) && { project: searchParams.get("project") },
+        ...(searchParams.get("draft") !== null) && { draft: searchParams.get("draft") },
+        ...(searchParams.get("public") !== null) && { public: searchParams.get("public") },
+        ...(invalidated !== null) && { invalidated }
+        //...(searchParams.get("invalidated") !== null) && {invalidated: searchParams.get("invalidated")}                        
+      },
+      singleDataType: props.singleDataType
+    });
+
+  // useEffect(() => {
+  //     //setTimeout(function() {
+  //     //console.log(keycloak.authenticated);
+  //     //if (props.keycloakReady) {
+  //         // let modLimit = limit;
+  //         // if (allData.data?.list?.length === limit+1) {
+  //         //   modLimit += 1;
+  //         // }
+  //         //console.log(searchString);
+
+  //         setAllData(prev => {
+  //           return {...prev, loading: true, data: null, error: null }
+  //         });
+  //           props.dataManager.getDatasets(keycloak.token, 
+  //               {
+  //                 skip, limit, searchString, sortBy, sortDirection, //v2: true,
+  //                 ...(searchParams.get("project") !== null) && {project: searchParams.get("project")},
+  //                 ...(searchParams.get("draft") !== null) && {draft: searchParams.get("draft")},
+  //                 ...(searchParams.get("public") !== null) && {public: searchParams.get("public")},
+  //                 ...(invalidated !== null) && {invalidated}
+  //                 //...(searchParams.get("invalidated") !== null) && {invalidated: searchParams.get("invalidated")}                        
+  //               })
+  //             .then(
+  //               (xhr: XMLHttpRequest) => {
+  //                 //setIsLoaded(true);
+  //                 const data = JSON.parse(xhr.response);
+  //                 //setData(d);
+  //                 setAllData(prev => {
+  //                   return {...prev, loading: false, data, error: null, statusCode: xhr.status}
+  //                 })
+  //               },
+  //               (xhr: XMLHttpRequest) => {
+  //                 const error = Util.getErrFromXhr(xhr);
+  //                 props.postMessage(new Message(Message.ERROR, "Error loading datasets", error.text));
+  //                 setAllData(prev => {
+  //                   return {...prev, loading: false, data: null, error, statusCode: xhr.status }
+  //                 });
+  //               });
+  //         //}
+
+  // }, //1000);},
+  // [props.keycloakReady, searchParams, sortBy, sortDirection, skip, limit, searchString]);
+  return (
+    <Container fluid>
+      <div className='d-flex flex-row gap-2  align-items-start'>
+        <SearchComponent initValue={searchString} searchStringUpdate={searchStringUpdate} />
         {
-          token: keycloak.token, 
-          qParams: {
-              skip, limit, searchString, sortBy, sortDirection, tag: [...tag],
-              ...(searchParams.get("project") !== null) && {project: searchParams.get("project")},
-              ...(searchParams.get("draft") !== null) && {draft: searchParams.get("draft")},
-              ...(searchParams.get("public") !== null) && {public: searchParams.get("public")},
-              ...(invalidated !== null) && {invalidated}
-              //...(searchParams.get("invalidated") !== null) && {invalidated: searchParams.get("invalidated")}                        
-            },
-          singleDataType: props.singleDataType
-        });
-
-        // useEffect(() => {
-        //     //setTimeout(function() {
-        //     //console.log(keycloak.authenticated);
-        //     //if (props.keycloakReady) {
-        //         // let modLimit = limit;
-        //         // if (allData.data?.list?.length === limit+1) {
-        //         //   modLimit += 1;
-        //         // }
-        //         //console.log(searchString);
-                
-        //         setAllData(prev => {
-        //           return {...prev, loading: true, data: null, error: null }
-        //         });
-        //           props.dataManager.getDatasets(keycloak.token, 
-        //               {
-        //                 skip, limit, searchString, sortBy, sortDirection, //v2: true,
-        //                 ...(searchParams.get("project") !== null) && {project: searchParams.get("project")},
-        //                 ...(searchParams.get("draft") !== null) && {draft: searchParams.get("draft")},
-        //                 ...(searchParams.get("public") !== null) && {public: searchParams.get("public")},
-        //                 ...(invalidated !== null) && {invalidated}
-        //                 //...(searchParams.get("invalidated") !== null) && {invalidated: searchParams.get("invalidated")}                        
-        //               })
-        //             .then(
-        //               (xhr: XMLHttpRequest) => {
-        //                 //setIsLoaded(true);
-        //                 const data = JSON.parse(xhr.response);
-        //                 //setData(d);
-        //                 setAllData(prev => {
-        //                   return {...prev, loading: false, data, error: null, statusCode: xhr.status}
-        //                 })
-        //               },
-        //               (xhr: XMLHttpRequest) => {
-        //                 const error = Util.getErrFromXhr(xhr);
-        //                 props.postMessage(new Message(Message.ERROR, "Error loading datasets", error.text));
-        //                 setAllData(prev => {
-        //                   return {...prev, loading: false, data: null, error, statusCode: xhr.status }
-        //                 });
-        //               });
-        //         //}
-
-        // }, //1000);},
-        // [props.keycloakReady, searchParams, sortBy, sortDirection, skip, limit, searchString]);
-      return (
-        <Container fluid>
-          <div>
-            <SearchComponent initValue={searchString} searchStringUpdate={searchStringUpdate} />
-          </div>
-          <DelCancelSingleDataMsg deleteData={deleteData}/>
-          {
-            isError ? 
-            <Alert variant="danger">
-              <Alert.Heading>Error loading data</Alert.Heading>
-              {"message" in error ? error.message : error.data}
-            </Alert>
-              : <></>
-          }
-          <div style={{display: "flex", flexDirection: "row"}}>
-            <div>
-              <FilteringView filterUpdate={filterUpdate} searchParams={searchParams}  loading={isLoading} 
-                  keycloakReady={props.keycloakReady} dataManager={props.dataManager} postMessage={props.postMessage}
-                  flags={[
-                    {name: "Draft", flag: "draft", backgroundVariant: "light", textColor: "dark", valueForRemove: null},
-                    {name: "Published", flag: "public", backgroundVariant: "dark", textColor: "light", valueForRemove: null},
-                    {name: "Invalidated", flag: "invalidated", backgroundVariant: "secondary", textColor: "light", valueForRemove: ""}
-                  ]}/>
-            </div>
-            <div style={{flexGrow: "1"}}>
-              <MainTable singleDataType={props.singleDataType} data={data && data?.list ? data.list.slice(0, limit) : []}
-                dataManager={props.dataManager}
-                postMessage={props.postMessage}
-                currentSort={{
-                  id: sortBy, 
-                  desc: sortDirection === "descending" ? true : false
-                }}
-                updSearchParams={updSearchParams}
-              />
-              <div className="d-flex flex-row justify-content-center w-100" >
-                  {/*
+          !keycloak.authenticated || <NewSingleData singleDataType={props.singleDataType} />
+        }
+        
+      </div>
+      <DelCancelSingleDataMsg deleteData={deleteData} />
+      {
+        isError ?
+          <Alert variant="danger">
+            <Alert.Heading>Error loading data</Alert.Heading>
+            {"message" in error ? error.message : error.data}
+          </Alert>
+          : <></>
+      }
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div>
+          <FilteringView filterUpdate={filterUpdate} searchParams={searchParams} loading={isLoading}
+            keycloakReady={props.keycloakReady} dataManager={props.dataManager} postMessage={props.postMessage}
+            flags={[
+              { name: "Draft", flag: "draft", backgroundVariant: "light", textColor: "dark", valueForRemove: null },
+              { name: "Published", flag: "public", backgroundVariant: "dark", textColor: "light", valueForRemove: null },
+              { name: "Invalidated", flag: "invalidated", backgroundVariant: "secondary", textColor: "light", valueForRemove: "" }
+            ]} />
+        </div>
+        <div style={{ flexGrow: "1" }}>
+          <MainTable singleDataType={props.singleDataType} data={data && data?.list ? data.list.slice(0, limit) : []}
+            dataManager={props.dataManager}
+            postMessage={props.postMessage}
+            currentSort={{
+              id: sortBy,
+              desc: sortDirection === "descending" ? true : false
+            }}
+            updSearchParams={updSearchParams}
+          />
+          <div className="d-flex flex-row justify-content-center w-100" >
+            {/*
                   <Button variant="link" className="position-relative start-50 me-4" disabled={skip === 0 ? true : false} onClick={(e) => updSearchParams({skip: skip - limit})}>&lt; Previous</Button>
                   <Button variant="link" className="position-relative start-50"  disabled={data?.list?.length <= limit ? true : false} onClick={(e) => updSearchParams({skip: skip + limit})}>Next &gt;</Button>
                   TableNavigationPages skip={skip} limit={limit} total={data} */}
-                  <PaginationFooter skip={skip} limit={limit} total={data?.total ?? 0} onSkipChange={onSkipChange} />
-              </div>
-            </div>
+            <PaginationFooter skip={skip} limit={limit} total={data?.total ?? 0} onSkipChange={onSkipChange} />
           </div>
-        </Container>
-      );
+        </div>
+      </div>
+    </Container>
+  );
 }
 
 export default MainView;

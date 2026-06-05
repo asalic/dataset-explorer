@@ -83,8 +83,14 @@ export interface PatchSingleDataT {
   singleDataType: SingleDataType;
 }
 
+export interface PostDatasetT {
+  token: string;
+  formData: FormData;
+}
+
 export interface GetUpgradableDatasetsT {
-  token: string | null | undefined;
+  token: string;
+  project: string;
 }
 
 export interface GetLicensesT {
@@ -110,7 +116,7 @@ export interface PutProjectLogoT {
 
 export interface GetProjectsT {
     token: string | null | undefined;
-    purpose: string;
+    purpose: "projectList" | "datasetCreation" | "datasetSearchFilter" | "userManagement";
 }
 
 export interface GetProjectT {

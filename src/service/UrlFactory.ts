@@ -23,6 +23,10 @@ export default class UrlFactory {
         return `${UrlFactory.singleData(singleDataType)}/${id}/details`
     }
 
+    public static datasetNew() {
+        return "/datasets/new";
+    }
+
     public static sites(): string { return `/sites`}
 
     public static getPutSite(siteCode: string): string { return `/sites/${siteCode}`;}

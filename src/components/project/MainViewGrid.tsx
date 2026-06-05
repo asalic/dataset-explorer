@@ -1,7 +1,6 @@
 import { Alert, Button, Card } from "react-bootstrap";
 import React from "react";
 import ProjectListItem from "../../model/project/ProjectListItem";
-import GetProjectsPurpose from "../../model/project/GetProjectsPurpose";
 import { useGetProjectsQuery } from "../../service/singledata-api";
 import { useKeycloak } from "@react-keycloak/web";
 import LoadingView from "../common/LoadingView";
@@ -24,7 +23,7 @@ function MainViewGrid({keycloakReady}: MainViewGridProps): JSX.Element {
 
     const { data, isLoading, error, isError } = useGetProjectsQuery({
         token: keycloak.token,
-        purpose: GetProjectsPurpose.PROJECT_LIST
+        purpose: "projectList"
         },
         {
             skip: !keycloakReady

@@ -29,6 +29,7 @@ import UserView from "./components/users/user/UserView";
 import SubprojectEditor from "./components/project/subproject/SubprojectEditor";
 import SitesMainView from "./components/site/SitesMainView";
 import SiteCreatorView from "./components/site/SiteCreatorView";
+import NewDataset from "./components/data/datasets/dataset/NewDataset";
 
 interface Dsv {
     tab: string;
@@ -104,6 +105,7 @@ function App({ keycloakReady }: AppProps) {
                         dataManager={dataManager} postMessage={postMessage} />} />
                     <Route path="/datasets" element={<DatasetsMainView keycloakReady={keycloakReady}
                         dataManager={dataManager} postMessage={postMessage} />} />
+                    <Route path={UrlFactory.datasetNew()} element={<NewDataset keycloakReady={keycloakReady} />} />
                     <Route path="/datasets/:singleDataId/details"
                         element={<DatasetView showDialog={showDialog} keycloakReady={keycloakReady}
                             postMessage={postMessage} dataManager={dataManager} activeTab={SingleDataView.TAB_DETAILS} />} />

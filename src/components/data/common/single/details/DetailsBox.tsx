@@ -37,7 +37,8 @@ function getIdEdit(singleDataId: string, singleDataType: SingleDataType,
         spec={BodyFactorySpecType.SINGLEDATA}
         additionalBodyProps={
             {
-                singleDataType
+                singleDataType,
+                projectCode: ds.project
             }
         }/>;
   } else if (text === NEXT_ID){

@@ -21,7 +21,19 @@ import UserListItem from '../model/user/UserListItem';
 import SubprojectList from '../model/project/SubprojectList';
 import SingleDataPageItem from '../model/SingleDataPageItem';
 import INDEX_OPERATIONS from '../model/IndexOperations';
-import type { DeleteSingleDataAclT, DeleteSingleDataCreatingT, GetDatasetCreationStatusT, GetIndexOperations, GetLicensesT, GetProjectConfigT, GetProjectsT, GetProjectT, GetSingleDataAclT, GetSingleDataPageT, GetSingleDataT, GetSubprojectsT, GetUpgradableDatasetsT, GetUserManagementJobLogsT, GetUserManagementJobsT, GetUserRolesT, GetUserSitesT, GetUsersPageT, GetUserT, PatchProjectT, PatchSingleDataT, PostSingleDataCheckIntegrityT, PostSingleDataReadjustFilePermissionsT, PostSingleDataRecollectMetadataT, PostSingleDataRestartCreationT, PutProjectConfigT, PutProjectLogoT, PutProjectT, PutSingleDataAclT, PutSubprojectT, PutUserT } from './singledata-api-types';
+import type {
+    DeleteSingleDataAclT, DeleteSingleDataCreatingT, GetDatasetCreationStatusT,
+    GetIndexOperations, GetLicensesT, GetProjectConfigT, GetProjectsT, GetProjectT,
+    GetSingleDataAclT, GetSingleDataPageT, GetSingleDataT, GetSubprojectsT,
+    GetUpgradableDatasetsT, GetUserManagementJobLogsT, GetUserManagementJobsT,
+    GetUserRolesT, GetUserSitesT, GetUsersPageT, GetUserT, PatchProjectT, PatchSingleDataT,
+    PostDatasetT,
+    PostSingleDataCheckIntegrityT, PostSingleDataReadjustFilePermissionsT,
+    PostSingleDataRecollectMetadataT, PostSingleDataRestartCreationT, PutProjectConfigT,
+    PutProjectLogoT, PutProjectT, PutSingleDataAclT, PutSubprojectT, PutUserT
+} from './singledata-api-types';
+import ItemPageSingleData from '../model/singledata/ItemPageSingleData';
+import DatasetCreated from '../model/singledata/dataset/DatasetCreated';
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '' }),
@@ -41,7 +53,7 @@ export const api = createApi({
             },
             providesTags: ["Model", "Dataset"],
         }),
-        getSingleDataPage: build.query<ItemPage<SingleDataPageItem>, GetSingleDataPageT>({
+        getSingleDataPage: build.query<ItemPageSingleData<SingleDataPageItem>, GetSingleDataPageT>({
             queryFn: async ({ token, qParams, singleDataType }: GetSingleDataPageT
         /*, queryApi, extraOptions, baseQuery*/) => {
                 try {
@@ -56,7 +68,7 @@ export const api = createApi({
 
                         });
                     }
-                    return { data: dt as ItemPage<SingleDataPageItem> };
+                    return { data: dt as ItemPageSingleData<SingleDataPageItem> };
                 } catch (error) { return { error: generateError(error) }; }
             },
             providesTags: ["Model", "Dataset"],
@@ -227,22 +239,32 @@ export const api = createApi({
             invalidatesTags: ["Model", "Dataset"],
         }),
 
+        postDataset: build.mutation<DatasetCreated, PostDatasetT>({
+            queryFn: async (args: PostDatasetT) => {
+                try {
+                    const headers = new Map();
+                    headers.set("Authorization", "Bearer " + args.token);
+                    console.log("Is FormData?", args.formData instanceof FormData);
 
+                    const data = await call("POST", `${BASE_URL_API}/datasets`, headers,
+                        args.formData, "text", null);
+                    return { data };
+                } catch (error) { return { error: generateError(error) }; }
+
+            },
+            invalidatesTags: ["Dataset"],
+        }),
 
         getUpgradableDatasets: build.query<UpgradableDataset[], GetUpgradableDatasetsT>({
             keepUnusedDataFor: 0,
-            queryFn: async ({ token }: GetDatasetCreationStatusT) => {
+            queryFn: async ({ token, project }: GetUpgradableDatasetsT) => {
                 try {
                     const headers = new Map();
-                    if (token) {
-                        headers.set("Authorization", "Bearer " + token);
-                    } else {
-                        return { error: generateError("Invalid token.") }
-                    }
+                    headers.set("Authorization", "Bearer " + token);
                     return {
                         data: await call("GET",
                             `${BASE_URL_API}/upgradableDatasets`, headers,
-                            null, "text", null) as UpgradableDataset[]
+                            null, "text", { project }) as UpgradableDataset[]
                     };
                 } catch (error) { return { error: generateError(error) }; }
 
@@ -569,14 +591,17 @@ export const {
     usePostSingleDataCheckIntegrityMutation,
     useDeleteSingleDataCreatingMutation,
     usePatchSingleDataMutation,
+    usePostDatasetMutation,
     useGetDatasetCreationStatusQuery,
     useGetUpgradableDatasetsQuery,
+    useLazyGetUpgradableDatasetsQuery,
     useGetLicensesQuery,
     usePutProjectMutation,
     usePutProjectConfigMutation,
     usePutProjectLogoMutation,
     useGetProjectsQuery,
     useGetSubprojectsQuery,
+    useLazyGetSubprojectsQuery,
     usePutSubprojectMutation,
     useGetProjectQuery,
     useGetProjectConfigQuery,
