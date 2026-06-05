@@ -17,7 +17,7 @@ export default function FilterTag({ searchParams, filterUpdate }: FilterTagProps
     };
     const deleteTags = useCallback((tagsToRemove: Set<string>) => filterUpdate({ tag: tag.filter(t => !tagsToRemove.has(t)) }), [filterUpdate])
 
-    return <div className="mt-4 mb-4">
+    return <div className="mt-4 mb-4 mx-2">
         <h6>Tags</h6>
         <TagEditor addTag={addTag} deleteTags={deleteTags} existingTags={tag} oneCol={true}/>
     </div>;
