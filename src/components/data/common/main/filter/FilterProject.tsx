@@ -87,7 +87,7 @@ function FilterProject(props: FilterProjectProps): JSX.Element {
             <Container fluid className="m-0 p-0">
                 {
                     !data.loading ?
-                        <Dropdown title="Select the project " className="me-1 ms-2" drop="down-centered" onSelect={onSelectProj}>
+                        <Dropdown title="Select the project " className="mx-2" drop="down-centered" onSelect={onSelectProj}>
                             <Dropdown.Toggle size="sm" variant="primary" id="dropdown-basic">
                                 {selProj === ALL_PROJECTS ? <i>{selProj}</i> : selProj} 
                             </Dropdown.Toggle>

@@ -48,8 +48,8 @@ function getFilterFlag(searchParams: URLSearchParams,
         bg: string, text: string, rmFilterValue: string | null, disabled: boolean) {
     return (
         <Row key={flagName} xs={1} sm={1} md={1} lg={1} xl={2} xxl={2} title={`Filter datasets that have the flag '${filter}'.`} 
-                className="ms-0 me-0 my-xs-3 my-sm-3 my-md-3 my-lg-3 my-xl-0 my-xxl-0" style={{display: "flex", flexDirection: "row"}}>
-            <Col xs={4} style={{display: "flex", flexDirection: "row", alignItems: "center"}} className="ps-2">
+                className="mx-0 px-2 my-xs-3 my-sm-3 my-md-3 my-lg-3 my-xl-0 my-xxl-0" style={{display: "flex", flexDirection: "row"}}>
+            <Col xs={4} style={{display: "flex", flexDirection: "row", alignItems: "center"}} className="ps-0">
                 <Badge pill bg={bg} text={text}>{flagName}</Badge> 
             </Col>
             <Col className="ms-3 ms-sm-3 ms-md-3 ms-lg-3 ms-xl-0 ms-xxl-0" style={{display: "flex", overflowX: "visible", marginLeft: "auto"}}>

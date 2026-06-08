@@ -25,7 +25,7 @@ export default function TagEditor({ existingTags, addTag, deleteTags, oneCol, cl
         setTagNew("");
     }
 
-    return <Container fluid className={`p-0 ms-2 me-2 ${className ?? ""}`}>
+    return <Container fluid className={`p-0 px-2 ${className ?? ""}`}>
         <div className={`d-flex gap-2 ${oneCol ? "flex-column" : ""}`}>
             <div className="d-flex flex-column flex-grow-1">
                 <div className={styles["inputWrapper"]}>
