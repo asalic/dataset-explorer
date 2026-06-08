@@ -45,7 +45,8 @@ export default interface ConfigJson {
     release: string;
     publicURL?: string | null;
     datasetService: DatasetService;
-    tracerService: string | null | undefined;
+    tracerService?: string | null;
+    caseExplorer?: ExternalService | null;
     basename: string;
     defaultLimitDatasets: number;
     defaultLimitStudies: number;

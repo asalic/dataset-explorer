@@ -103,7 +103,7 @@ function App({ keycloakReady }: AppProps) {
                     <Route path="/support" element={<SupportView />} />
                     <Route path="/models" element={<ModelsMainView keycloakReady={keycloakReady}
                         dataManager={dataManager} postMessage={postMessage} />} />
-                    <Route path="/datasets" element={<DatasetsMainView keycloakReady={keycloakReady}
+                    <Route path="/datasets" element={<DatasetsMainView showDialog={showDialog} keycloakReady={keycloakReady}
                         dataManager={dataManager} postMessage={postMessage} />} />
                     <Route path={UrlFactory.datasetNew()} element={<NewDataset keycloakReady={keycloakReady} />} />
                     <Route path="/datasets/:singleDataId/details"

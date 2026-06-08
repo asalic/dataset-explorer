@@ -82,7 +82,7 @@ function NavbarView() {
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {
-                            config.externalServices?.map(e => {
+                            [config.caseExplorer, ...(config.externalServices ?? [])].filter(e => e != null).map(e => {
                                 return <Dropdown.Item key={e.title} title={e.title} onClick={() => window?.open(e.link, '_blank')?.focus()}>
                                     <img title="e.title" className="apps-logo me-2" src={config.publicURL + e.icon} />{e.name}
                                 </Dropdown.Item>

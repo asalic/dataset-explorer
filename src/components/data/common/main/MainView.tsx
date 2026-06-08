@@ -44,6 +44,7 @@ interface MainViewProps {
   dataManager: DataManager;
   postMessage: Function;
   activeTab?: string | undefined;
+  showDialog: Function;
 }
 
 function MainView(props: MainViewProps) {
@@ -179,7 +180,7 @@ function MainView(props: MainViewProps) {
       <div className='d-flex flex-row gap-2  align-items-start'>
         <SearchComponent initValue={searchString} searchStringUpdate={searchStringUpdate} />
         {
-          !keycloak.authenticated || <NewSingleData singleDataType={props.singleDataType} />
+          !keycloak.authenticated || <NewSingleData singleDataType={props.singleDataType} showDialog={props.showDialog}/>
         }
         
       </div>

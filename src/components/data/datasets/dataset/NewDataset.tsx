@@ -177,7 +177,7 @@ export default function NewDataset({ keycloakReady }: NewDatasetProps): JSX.Elem
         } catch (e: any) {
             setErrorPostDataset(Util.getError(e).message);
         }
-    }, [setErrorPostDataset, previousId,postDataset, keycloak.token, setErrorPostDataset])
+    }, [setErrorPostDataset, previousId, postDataset, keycloak.token, setErrorPostDataset])
 
     if (!keycloakReady) {
         return <LoadingView fullMessage="Connecting to the OIDC provider, please wait..." />
@@ -207,6 +207,11 @@ export default function NewDataset({ keycloakReady }: NewDatasetProps): JSX.Elem
             {
                 errorPostDataset ? <ErrorView message={`Error creating the dataset: ${errorPostDataset}`} /> : null
             }
+            <Alert variant="info">
+                This approach is designed for creating new versions of existing datasets.
+                To get started, please access this page from a desktop running on our platform that has access to the base dataset.
+                You can then use the existing <b>index.json</b> and <b>eforms.json</b> files as a starting point to modify or adjust the content.
+            </Alert>
             <Form onSubmit={onCreateDataset} className="px-3">
                 <Row>
                     <Col xxl="4" md="6">

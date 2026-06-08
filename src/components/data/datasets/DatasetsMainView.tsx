@@ -8,11 +8,14 @@ interface DatasetsMainViewProps {
     dataManager: DataManager;
     postMessage: Function;
     activeTab?: string;
+    showDialog: Function;
   }
   
 function DatasetsMainView(props: DatasetsMainViewProps) {
 
-  return <MainView singleDataType={SingleDataType.DATASET} keycloakReady={props.keycloakReady} dataManager={props.dataManager} postMessage={props.postMessage} activeTab={props.activeTab}/>
+  return <MainView singleDataType={SingleDataType.DATASET} keycloakReady={props.keycloakReady} 
+    dataManager={props.dataManager} postMessage={props.postMessage} 
+    activeTab={props.activeTab} showDialog={props.showDialog}/>
 
 }
 

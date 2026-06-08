@@ -6,6 +6,12 @@
     "projectLogo": "http://asaserver.i3m.upv.es:8000/api/v1"
   },
   "tracerService": "http://asaserver.i3m.upv.es:8000/api/v1/tracer-service",
+  "caseExplorer": {
+      "name": "Case Explorer",
+      "title": "Launch the case explorer (Quibim Precision)",
+      "link": "https://chaimeleon-eu.i3m.upv.es/omni/",
+      "icon": "/icons/quibim.png"
+  },
   "appsDashboard": "",
   "basename": "",
   "defaultLimitDatasets": 4,
@@ -54,12 +60,6 @@
       "title": "Access your desktop cluster applications (Apache Guacamole)",
       "link": "https://chaimeleon-eu.i3m.upv.es/guacamole/",
       "icon": "/icons/guacamole.png"
-    },
-    {
-      "name": "Case Explorer",
-      "title": "Launch the case explorer (Quibim Precision)",
-      "link": "https://chaimeleon-eu.i3m.upv.es/omni/",
-      "icon": "/icons/quibim.png"
     }
 
   ]
