@@ -1,5 +1,5 @@
-import QueryParamsType from "../model/QueryParamsType";
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import type QueryParamsType from "../model/QueryParamsType";
+import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import config from "../service/config";
 import Util from "../Util";
 
@@ -101,7 +101,7 @@ function _call(method: string, path: string,
   
           };
           if (queryParams !== null) {
-            const entr = Object.entries(queryParams).filter(([k,v]) => {
+            const entr = Object.entries(queryParams).filter(([,v]) => {
                 return v !== undefined && v !== null && (!Array.isArray(v) || v.length > 0);
             });
             //let size = entr.length;

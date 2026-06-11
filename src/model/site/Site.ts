@@ -1,4 +1,4 @@
-import SiteShort from "./SiteShort";
+import type SiteShort from "./SiteShort";
 
 export default interface Site extends SiteShort {
     country:  string;

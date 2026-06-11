@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { type ChangeEvent, useCallback, useEffect, useState } from "react";
 import {  Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { useGetUserQuery, usePutUserMutation, useGetUserSitesQuery, useGetUserRo
 import Util from "../../../Util";
 import UrlFactory from "../../../service/UrlFactory";
 import MultiSelect from "../../common/MultiSelect";
-import { UserAttributeGroup, UserAttribute } from "../../../model/user/User";
+import { type UserAttributeGroup, type UserAttribute } from "../../../model/user/User";
 
 interface UserDetailsViewProps {
   showDialog: Function;

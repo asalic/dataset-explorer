@@ -1,6 +1,6 @@
-import Trace from "./Trace";
+import type Trace from "./Trace";
 
-export default class TracesBCPaginated {
+export default interface TracesBCPaginated {
 
     blockchain: string;
     traces: Trace[];

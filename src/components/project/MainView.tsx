@@ -1,6 +1,5 @@
 
 import { useKeycloak } from "@react-keycloak/web";
-import React from "react";
 import { Button } from "react-bootstrap";
 import MainViewGrid from "./MainViewGrid";
 import { useGetProjectsQuery } from "../../service/singledata-api";

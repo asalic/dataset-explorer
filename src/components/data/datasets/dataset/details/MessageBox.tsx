@@ -1,9 +1,9 @@
 import { useKeycloak } from "@react-keycloak/web";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useAppDispatch } from "../../../../../store";
 
-import SingleData from "../../../../../model/SingleData";
+import type SingleData from "../../../../../model/SingleData";
 import { api, useGetDatasetCreationStatusQuery } from "../../../../../service/singledata-api";
 import UrlFactory from "../../../../../service/UrlFactory";
 import SingleDataType from "../../../../../model/SingleDataType";

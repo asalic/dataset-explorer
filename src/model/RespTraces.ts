@@ -1,6 +1,6 @@
-import TracesBCPaginated from "./TracesBCPaginated";
+import type TracesBCPaginated from "./TracesBCPaginated";
 
-export default class RespTraces{
+export default interface RespTraces{
 
     traces: TracesBCPaginated[];
 }

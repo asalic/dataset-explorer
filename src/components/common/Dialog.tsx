@@ -1,5 +1,5 @@
 import { Alert, Modal} from 'react-bootstrap';
-import React, { useState, useEffect} from "react";
+import { useState, useEffect} from "react";
 import type DialogSettings from '../../model/DialogSettings';
 import DialogSize from '../../model/DialogSize';
 import Message from '../../model/Message';

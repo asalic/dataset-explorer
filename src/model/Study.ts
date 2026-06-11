@@ -1,4 +1,4 @@
-import Series from "./Series";
+import type Series from "./Series";
 
 export default interface Study {
 

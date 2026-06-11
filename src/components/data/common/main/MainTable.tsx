@@ -2,17 +2,17 @@ import { Link } from "react-router-dom";
 import { Badge, Table as BTable, Button } from 'react-bootstrap';
 import { ArrowDownUp, CaretDownFill, CaretUpFill } from "react-bootstrap-icons";
 import { useTable, useRowSelect, useFilters, useGlobalFilter, useSortBy, Row, Column, CellProps } from 'react-table';
-import React, { Fragment, useMemo, useRef, useState } from 'react';
+import { Fragment, useMemo, useRef, useState } from 'react';
 import { matchSorter } from 'match-sorter';
 
 import DataManager from "../../../../api/DataManager";
-import MainTableSortBy from "../../../../model/MainTableSortBy"
+import type MainTableSortBy from "../../../../model/MainTableSortBy"
 import TableNoData from "../../../common/TableNoData";
 import SingleDataType from "../../../../model/SingleDataType";
 import UrlFactory from "../../../../service/UrlFactory";
 import CopiableFieldEntryProps from "../../../common/CopiableFieldEntry";
 import SingleDataFactory from "../../../../api/SingleDataFactory";
-import SingleDataPageItem from "../../../../model/SingleDataPageItem";
+import type SingleDataPageItem from "../../../../model/SingleDataPageItem";
 import TagComponent from "../../../common/tag/TagComponent";
 import TagsPopover from "../../../common/tag/TagsPopover";
 

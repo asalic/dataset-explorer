@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form } from "react-bootstrap";
 import LogoType from "../../model/project/LogoType";
-import Logo from "../../model/project/Logo";
+import type Logo from "../../model/project/Logo";
 
 interface LogoAdminProps {
     className?: string;

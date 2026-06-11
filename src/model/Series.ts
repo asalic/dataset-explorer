@@ -1,5 +1,5 @@
 
-export default class Series {
+export default interface Series {
 
     folderName: string | null;
     tags: string[];

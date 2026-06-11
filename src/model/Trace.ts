@@ -1,5 +1,5 @@
 
-export default class Trace {
+export default interface Trace {
 
     version: string;
     id: string;

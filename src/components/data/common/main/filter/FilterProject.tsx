@@ -1,8 +1,8 @@
 import { useKeycloak } from "@react-keycloak/web";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Container, Dropdown } from "react-bootstrap";
 import DataManager from "../../../../../api/DataManager";
-import LoadingData from "../../../../../model/LoadingData";
+import type LoadingData from "../../../../../model/LoadingData";
 import Message from "../../../../../model/Message";
 import Util from "../../../../../Util";
 import LoadingView from "../../../../common/LoadingView";
@@ -72,7 +72,7 @@ function FilterProject(props: FilterProjectProps): JSX.Element {
     const disabled = props.loading === true;
     const selProj = getSelProj(data.data ?? [], props.searchParams);
 
-    const onSelectProj = useCallback((eventKey: any, event: Object) => {
+    const onSelectProj = useCallback((eventKey: any, _event: Object) => {
         if (eventKey === ALL_PROJECTS) {
             props.filterUpdate({project: null});
         } else {

@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
-import License from "../../model/License";
+import { type ChangeEvent, type FormEvent, useCallback, useState } from "react";
+import type License from "../../model/License";
 import { useGetLicensesQuery } from "../../service/singledata-api";
 import { Alert, Form } from "react-bootstrap";
 import LoadingView from "../common/LoadingView";
 import { useKeycloak } from "@react-keycloak/web";
-import ProjectConfig from "../../model/project/ProjectConfig";
+import type ProjectConfig from "../../model/project/ProjectConfig";
 import ErrorView from "../common/ErrorView";
 import Util from "../../Util";
 

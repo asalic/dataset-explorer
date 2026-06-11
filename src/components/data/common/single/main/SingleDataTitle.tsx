@@ -1,8 +1,6 @@
-import React from "react";
 import { Badge } from "react-bootstrap";
 import { useKeycloak } from "@react-keycloak/web";
 import { Envelope } from "react-bootstrap-icons";
-import SingleData from "../../../../../model/SingleData";
 import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/singledata-api";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
@@ -12,14 +10,14 @@ import SingleDataFactory from "../../../../../api/SingleDataFactory";
 import GenericFieldEdit from "../../../../common/fieldedit/GenericFieldEdit";
 import BodyFactorySpecType from "../../../../../model/BodyFactorySpecType";
 
-interface SingleDataTitleProps<T extends SingleData> {
+interface SingleDataTitleProps {
     keycloakReady: boolean;
     singleDataId: string;
     showDialog: Function;
     singleDataType: SingleDataType;
 }
 
-function SingleDataTitle<T extends SingleData>(props: SingleDataTitleProps<T>) {
+function SingleDataTitle(props: SingleDataTitleProps) {
     const { keycloak } = useKeycloak();
 
     const { data, isLoading, error, isError } = useGetSingleDataQuery({

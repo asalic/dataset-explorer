@@ -1,8 +1,8 @@
 import { useKeycloak } from "@react-keycloak/web";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Placeholder } from "react-bootstrap";
-import Select, { ActionMeta, Props, GroupBase, SingleValue } from 'react-select';
-import UpgradableDataset from "../../../../../../model/UpgradableDataset";
+import Select, { type ActionMeta, type Props, type GroupBase, type SingleValue } from 'react-select';
+import type UpgradableDataset from "../../../../../../model/UpgradableDataset";
 import { useGetUpgradableDatasetsQuery } from "../../../../../../service/singledata-api";
 import ErrorView from "../../../../../common/ErrorView";
 import SingleDataFactory from "../../../../../../api/SingleDataFactory";
@@ -29,7 +29,7 @@ function toSelId(val: UpgradableDataset): SelOpt {
 }
 
 function CustomSelect<
-  Option = SelOpt,
+//   Option = SelOpt,
   IsMulti extends boolean = false,
   Group extends GroupBase<SelOpt> = GroupBase<SelOpt>
 >(props: Props<SelOpt, IsMulti, Group>) {

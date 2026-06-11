@@ -1,5 +1,5 @@
 import { Button, Form } from "react-bootstrap";
-import React, {useState, FormEvent} from "react";
+import {useState, type FormEvent} from "react";
 
 import StaticValues from "../../../../../../api/StaticValues";
 

@@ -1,4 +1,4 @@
-import SingleData from "../model/SingleData";
+import type SingleData from "../model/SingleData";
 import SingleDataType from "../model/SingleDataType";
 
 export default class SingleDataFactory {

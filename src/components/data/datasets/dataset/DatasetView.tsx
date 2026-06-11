@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import DataManager from "../../../../api/DataManager";
 import SingleDataView from "../../common/single/main/SingleDataView";
-import SingleItemTab from "../../../../model/SingleItemTab";
+import type SingleItemTab from "../../../../model/SingleItemTab";
 import { useKeycloak } from "@react-keycloak/web";
 import DatasetStudiesView from "./studies/DatasetStudiesView";
 import HistoryView from "../../common/single/history/HistoryView";
@@ -14,7 +14,7 @@ import { showDialogAppDashhboard } from "../../common/single/common/Operations";
 import ResourceNotFoundView from "../../../common/ResourceNotFoundView";
 import SingleDataType from "../../../../model/SingleDataType";
 import { useGetSingleDataQuery } from "../../../../service/singledata-api";
-import Dataset from "../../../../model/Dataset";
+import type Dataset from "../../../../model/Dataset";
 import DatasetDetailsView from "./details/DatasetDetailsView";
 import LoadingView from "../../../common/LoadingView";
 import ErrorView from "../../../common/ErrorView";

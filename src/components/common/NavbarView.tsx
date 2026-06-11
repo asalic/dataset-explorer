@@ -1,5 +1,5 @@
 import { Container, Navbar, Nav, Badge, Dropdown, NavDropdown } from "react-bootstrap";
-import React, { useMemo, useId } from "react";
+import { useMemo, useId } from "react";
 import { GridFill } from 'react-bootstrap-icons';
 
 import UserInfo from "./UserInfo";

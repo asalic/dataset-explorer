@@ -1,5 +1,4 @@
 import { useKeycloak } from "@react-keycloak/web";
-import React from "react";
 import { ListGroup } from "react-bootstrap";
 import UserAdd from "./UserAdd";
 import UserList from "./UserList";
@@ -7,7 +6,7 @@ import SingleDataType from "../../../../../model/SingleDataType";
 import { useGetSingleDataQuery } from "../../../../../service/singledata-api";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
-import SingleData from "../../../../../model/SingleData";
+import type SingleData from "../../../../../model/SingleData";
 
 interface AccessControlListViewProps {
     keycloakReady: boolean;

@@ -1,6 +1,6 @@
-import ItemPage from "./ItemPage";
-import Study from "./Study";
-import SingleData from "./SingleData";
+import type ItemPage from "./ItemPage";
+import type Study from "./Study";
+import type SingleData from "./SingleData";
 
 export default interface Dataset extends SingleData {
     diagnosis: string[];

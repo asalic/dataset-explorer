@@ -1,12 +1,14 @@
 #! /usr/bin/env node
 
-const { exec, execSync } = require('child_process');
-const os = require('os');
-const axios = require('axios');
-const http = require('http');
-const fs = require('fs');
-const child_process = require('child_process');
-const { createHttpTerminator } = require('http-terminator');
+import child_process, { exec, execSync } from 'child_process';
+import os from 'os';
+import axios from 'axios';
+import http from 'http';
+import fs from 'fs';
+import { createHttpTerminator } from 'http-terminator';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
 
 if (process.argv.length < 5) {
     console.error(`This script requires three arguments (and one optional): 
@@ -22,7 +24,16 @@ const release = process.argv[2];
 const token = process.argv[3];
 const meth = process.argv[4];
 const selectedIp = process.argv[5];
-const dsServer =  require(`./config-${release}.json`).datasetService.api;
+
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const configJson = await import(`./config-${release}.json`, {
+  with: { type: "json" }
+});
+const dsServer = configJson.default.datasetService.api;
 let server = null;
 let ip = null;
 if (meth === "server") {
@@ -68,8 +79,8 @@ try {
         ["-c", 
         `cd ${__dirname} \
         && npm run build-${release} \
-        && cd build \
-        && zip -r ./build.zip ./*`
+        && cd dist \
+        && zip -r ./dist.zip ./*`
     ]
         , {
             stdio: 'inherit',
@@ -82,11 +93,11 @@ try {
             devToken: token
         }
         if (meth === "server") {
-            data = `http://${ip}:3005/build/build.zip`;
+            data = `http://${ip}:3005/dist/dist.zip`;
             
         } else if (meth === "upload") {
             data = new FormData();
-            data.append("zip", new Blob([fs.readFileSync(`${__dirname}/build/build.zip`)]), "build.zip");
+            data.append("zip", new Blob([fs.readFileSync(`${__dirname}/dist/dist.zip`)]), "dist.zip");
             url += "?method=fileInBody";
             headers['content-type'] = 'multipart/form-data';
         } else {

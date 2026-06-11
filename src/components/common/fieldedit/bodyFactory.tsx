@@ -1,4 +1,3 @@
-import React from "react";
 import BodyFactorySpecType from "../../../model/BodyFactorySpecType";
 import Body from "./Body";
 import ErrorView from "../ErrorView";

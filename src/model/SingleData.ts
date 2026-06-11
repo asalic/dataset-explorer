@@ -1,6 +1,6 @@
 
-import DatasetPids from "./DatasetPids";
-import License from "./License";
+import type DatasetPids from "./DatasetPids";
+import type License from "./License";
 import SingleDataType from "./SingleDataType";
 
 export default interface SingleData {

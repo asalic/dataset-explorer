@@ -1,7 +1,7 @@
-import React, { Fragment, useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import DataManager from "../../../api/DataManager";
-import SingleItemTab from "../../../model/SingleItemTab";
+import type SingleItemTab from "../../../model/SingleItemTab";
 import { useKeycloak } from "@react-keycloak/web";
 import Util from "../../../Util";
 import { useParams } from "react-router-dom";

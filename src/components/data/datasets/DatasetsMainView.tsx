@@ -1,4 +1,3 @@
-import React from "react";
 import DataManager from "../../../api/DataManager";
 import MainView from "../common/main/MainView";
 import SingleDataType from "../../../model/SingleDataType";

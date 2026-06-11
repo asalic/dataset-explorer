@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import SitesList from "./SitesList";
 import SiteEditor from "./SiteEditor";

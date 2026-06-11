@@ -1,7 +1,7 @@
 
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { Search as SearchIc } from "react-bootstrap-icons";
-import React, {useState, useEffect}from 'react';
+import {useState, useEffect}from 'react';
 
 interface SearchComponentProps {
   initValue: string;

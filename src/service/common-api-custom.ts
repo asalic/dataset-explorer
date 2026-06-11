@@ -1,6 +1,6 @@
 import { useState } from "react";
-import MutationHookLike from "../model/MutationHookLike";
-import Logo from "../model/project/Logo";
+import type MutationHookLike from "../model/MutationHookLike";
+import type Logo from "../model/project/Logo";
 import LogoType from "../model/project/LogoType";
 import { usePatchProjectMutation, usePutProjectLogoMutation } from "./singledata-api";
 import Util from "../Util";

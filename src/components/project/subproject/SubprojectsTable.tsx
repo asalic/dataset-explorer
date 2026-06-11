@@ -1,5 +1,4 @@
-import React from "react";
-import Subproject from "../../../model/project/Subproject";
+import type Subproject from "../../../model/project/Subproject";
 import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import UrlFactory from "../../../service/UrlFactory";

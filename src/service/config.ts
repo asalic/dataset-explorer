@@ -1,8 +1,11 @@
 // import Config from "../../public/config.json";
-import ConfigJson from "../model/ConfigJson";
+import type ConfigJson from "../model/ConfigJson";
 // const response = await fetch(`${(globalThis as any)["DYNAMIC_PUBLIC_URL"]}/config.json`);
 
-const publicURL = (globalThis as any).PUBLIC_URL;
+const { protocol, hostname, port } = window.location;
+const publicURL = `${protocol}//${hostname}${port ? `:${port}` : ''}${import.meta.env.BASE_URL}`;//(globalThis as any).PUBLIC_URL;
+
+console.log(publicURL)
 const response = await fetch(`${publicURL}/config.json`);
 const j = await response.json();
 if (!j["publicURL"]) {

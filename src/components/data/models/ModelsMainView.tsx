@@ -1,15 +1,15 @@
-import React from "react";
-import DataManager from "../../../api/DataManager";
+// import DataManager from "../../../api/DataManager";
 
-interface ModelsMainViewProps {
-    keycloakReady: boolean;
-    dataManager: DataManager;
-    postMessage: Function;
-    activeTab?: string;
-  }
+// interface ModelsMainViewProps {
+//     keycloakReady: boolean;
+//     dataManager: DataManager;
+//     postMessage: Function;
+//     activeTab?: string;
+//   }
   
-function ModelsMainView(props: ModelsMainViewProps) {
+function ModelsMainView() {
 
+  
   return <h3>Under construction, stay tuned!</h3>
 
 }

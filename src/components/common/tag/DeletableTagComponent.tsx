@@ -1,5 +1,4 @@
 
-import React from "react";
 import TagComponent from "./TagComponent";
 import { Button } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";

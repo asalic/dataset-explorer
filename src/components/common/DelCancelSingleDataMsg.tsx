@@ -1,7 +1,6 @@
 
-import React from "react";
 import { Alert } from "react-bootstrap";
-import DeletedSingleData from "../../model/DeletedSingleData";
+import type DeletedSingleData from "../../model/DeletedSingleData";
 import Util from "../../Util";
 
 

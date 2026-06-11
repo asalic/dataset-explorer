@@ -1,9 +1,9 @@
 import { FormControl } from "react-bootstrap";
-import React, { Fragment, FormEvent, useCallback, useEffect } from "react";
+import { Fragment, type FormEvent, useCallback, useEffect } from "react";
 import { useKeycloak } from "@react-keycloak/web";
 
 //import licenses from "../../../../../../licenses.json";
-import License from "../../../../../../model/License";
+import type License from "../../../../../../model/License";
 import ErrorView from "../../../../../common/ErrorView";
 import LoadingView from "../../../../../common/LoadingView";
 import { useGetLicensesQuery } from "../../../../../../service/singledata-api";

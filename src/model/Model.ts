@@ -1,4 +1,4 @@
-import SingleData from "./SingleData";
+import type SingleData from "./SingleData";
 
 
 export default interface Model extends SingleData {

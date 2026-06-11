@@ -1,5 +1,4 @@
 import { useKeycloak } from "@react-keycloak/web";
-import React from "react";
 import SiteEditor from "./SiteEditor";
 import ErrorView from "../common/ErrorView";
 import LoadingView from "../common/LoadingView";

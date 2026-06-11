@@ -1,7 +1,6 @@
-import React from "react";
 import { Tab, Row, Col, Container, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import SingleItemTab from "../../model/SingleItemTab";
+import type SingleItemTab from "../../model/SingleItemTab";
 
 interface TabsViewProps {
   basePath: string;

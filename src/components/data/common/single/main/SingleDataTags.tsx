@@ -1,6 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web";
 import SingleDataType from "../../../../../model/SingleDataType";
-import React from "react";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
 import TagComponent from "../../../../common/tag/TagComponent";

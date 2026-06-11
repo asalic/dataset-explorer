@@ -1,4 +1,4 @@
-import License from "../License";
+import type License from "../License";
 
 export default interface ProjectConfig {
     defaultContactInfo?: string;

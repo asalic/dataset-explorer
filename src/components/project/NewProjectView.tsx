@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useCallback, useState } from "react";
+import { type SyntheticEvent, useCallback, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import UrlFactory from "../../service/UrlFactory";
@@ -8,7 +8,7 @@ import ErrorView from "../common/ErrorView";
 import Util from "../../Util";
 import LoadingView from "../common/LoadingView";
 import ConfigEditorCommon from "./ConfigEditorCommon";
-import ProjectConfig from "../../model/project/ProjectConfig";
+import type ProjectConfig from "../../model/project/ProjectConfig";
 import LogoAdmin from "./LogoAdmin";
 import type Logo from "../../model/project/Logo";
 import LogoType from "../../model/project/LogoType";

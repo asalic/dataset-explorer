@@ -1,4 +1,3 @@
-import React from "react";
 import { Overlay, Popover } from "react-bootstrap";
 import TagComponent from "./TagComponent";
 

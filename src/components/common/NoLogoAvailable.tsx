@@ -1,4 +1,3 @@
-import React from "react";
 import { SlashCircle } from "react-bootstrap-icons";
 
 function NoLogoAvailable({}): JSX.Element {

@@ -1,19 +1,17 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 // Careful with the order of CSS loading, if you want to modify Bootstrap's settings
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import './main.css';
 import AppKeycloak from './AppKeycloak';
-import reportWebVitals from './reportWebVitals';
 import config from "./service/config";
 import {store} from "./store";
 
 //const Loading = () => <div>Loading, please wait...</div>
 
 function favicon(rel: string, iconPath: string): void {
-      var link: HTMLLinkElement = document.querySelector(`link[rel*='${rel}']`) || document.createElement('link');
+      const link: HTMLLinkElement = document.querySelector(`link[rel*='${rel}']`) || document.createElement('link');
       link.type = 'image/x-icon';
       link.rel = 'icon';
       link.href = config.publicURL + iconPath;
@@ -33,8 +31,3 @@ if (domNode) {
             </Provider>
       );
 }
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

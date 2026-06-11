@@ -1,4 +1,4 @@
-import ExternalService from "./ExternalService";
+import type ExternalService from "./ExternalService";
 
 interface KeycloakConfigOptions {
     responseMode: string;

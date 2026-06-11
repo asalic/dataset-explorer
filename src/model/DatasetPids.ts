@@ -1,4 +1,4 @@
-import DatasetPidsUrls from "./DatasetPidsUrls";
+import type DatasetPidsUrls from "./DatasetPidsUrls";
 
 export default interface DatasetPids {
 

@@ -1,5 +1,5 @@
 
-export default class AclUser {
+export default interface AclUser {
 
     uid: string;
     username: string;

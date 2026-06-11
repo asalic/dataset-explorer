@@ -1,8 +1,8 @@
-import React, {ReactNode, useEffect, useState} from "react";
+import { type ReactNode, useEffect, useState} from "react";
 import { Accordion, Button, Col, Container, Row } from "react-bootstrap";
 import DataManager from "../../../../../api/DataManager";
-import FilterCategory from "../../../../../model/FilterCategory";
-import TraceTable from "../../../../../model/TraceTable";
+import type FilterCategory from "../../../../../model/FilterCategory";
+import type TraceTable from "../../../../../model/TraceTable";
 
 import DataFilterCategory from "./DataFilterCategory";
 
@@ -76,7 +76,7 @@ function DataFilterView(props: DataFilterViewProps) {
 
   let components: ReactNode[] = [];
   if (categories.length > 0)
-    components = categories.map((m, idx) => <DataFilterCategory updFilter={updFilter} updFilters={updFilters}
+    components = categories.map((m) => <DataFilterCategory updFilter={updFilter} updFilters={updFilters}
       category={m} postMessage={props.postMessage}/>);
   return (
     <Container fluid>
@@ -91,9 +91,9 @@ function DataFilterView(props: DataFilterViewProps) {
       <Row>
         <Accordion defaultActiveKey="0">
           {components.map((component, index) => (
-            <React.Fragment key={index}>
+            <div key={index}>
                   { component }
-            </React.Fragment>
+            </div>
           ))}
 
         </Accordion>

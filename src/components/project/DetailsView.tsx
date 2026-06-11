@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Alert, Col, Container, Image, Row } from "react-bootstrap";
 import ErrorView from "../common/ErrorView";
 import LoadingView from "../common/LoadingView";
@@ -10,7 +10,7 @@ import NoLogoAvailable from "../common/NoLogoAvailable";
 import UrlFactory from "../../service/UrlFactory";
 import GenericFieldEdit from "../common/fieldedit/GenericFieldEdit";
 import BodyFactorySpecType from "../../model/BodyFactorySpecType";
-import License from "../../model/License";
+import type License from "../../model/License";
 import ProjectAllowedActions from "../../model/project/ProjectAllowedActions";
 import SubprojectsSection from "./subproject/SubprojectsSection";
 import LogoType from "../../model/project/LogoType";

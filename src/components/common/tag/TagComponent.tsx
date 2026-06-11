@@ -1,5 +1,4 @@
 
-import React from "react";
 import { Badge, Button } from "react-bootstrap";
 import styles from "./TagComponent.module.css";
 import { useNavigate } from "react-router-dom";

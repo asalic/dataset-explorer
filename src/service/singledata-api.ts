@@ -1,25 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { EndpointBuilder } from "@reduxjs/toolkit/query";
+import { type EndpointBuilder } from "@reduxjs/toolkit/query";
 //import QueryParamsType from '../model/QueryParamsType';
-import ItemPage from '../model/ItemPage';
+import type ItemPage from '../model/ItemPage';
 import { call, BASE_URL_API, generateError } from "./common-api";
-import SingleData from '../model/SingleData';
+import type SingleData from '../model/SingleData';
 import Util from '../Util';
-import DatasetCreationStatus from '../model/DatasetCreationStatus';
-import License from '../model/License';
-import UpgradableDataset from '../model/UpgradableDataset';
-import CheckIntegrity from '../model/CheckIntegrity';
-import AclUser from '../model/AclUser';
-import DeletedSingleData from '../model/DeletedSingleData';
+import type DatasetCreationStatus from '../model/DatasetCreationStatus';
+import type License from '../model/License';
+import type UpgradableDataset from '../model/UpgradableDataset';
+import type CheckIntegrity from '../model/CheckIntegrity';
+import type AclUser from '../model/AclUser';
+import type DeletedSingleData from '../model/DeletedSingleData';
 import SingleDataFactory from '../api/SingleDataFactory';
-import Project from '../model/project/Project';
-import ProjectConfig from '../model/project/ProjectConfig';
-import ProjectList from '../model/project/ProjectList';
-import User from '../model/user/User';
-import ManagementJob from '../model/ManagementJob';
-import UserListItem from '../model/user/UserListItem';
-import SubprojectList from '../model/project/SubprojectList';
-import SingleDataPageItem from '../model/SingleDataPageItem';
+import type Project from '../model/project/Project';
+import type ProjectConfig from '../model/project/ProjectConfig';
+import type ProjectList from '../model/project/ProjectList';
+import type User from '../model/user/User';
+import type ManagementJob from '../model/ManagementJob';
+import type UserListItem from '../model/user/UserListItem';
+import type SubprojectList from '../model/project/SubprojectList';
+import type SingleDataPageItem from '../model/SingleDataPageItem';
 import INDEX_OPERATIONS from '../model/IndexOperations';
 import type {
     DeleteSingleDataAclT, DeleteSingleDataCreatingT, GetDatasetCreationStatusT,
@@ -32,8 +32,8 @@ import type {
     PostSingleDataRecollectMetadataT, PostSingleDataRestartCreationT, PutProjectConfigT,
     PutProjectLogoT, PutProjectT, PutSingleDataAclT, PutSubprojectT, PutUserT
 } from './singledata-api-types';
-import ItemPageSingleData from '../model/singledata/ItemPageSingleData';
-import DatasetCreated from '../model/singledata/dataset/DatasetCreated';
+import type ItemPageSingleData from '../model/singledata/ItemPageSingleData';
+import type DatasetCreated from '../model/singledata/dataset/DatasetCreated';
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '' }),

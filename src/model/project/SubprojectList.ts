@@ -1,4 +1,4 @@
-import Subproject from "./Subproject";
+import type Subproject from "./Subproject";
 
 export default interface SubprojectList {
     list: Array<Subproject>;

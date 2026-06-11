@@ -1,8 +1,8 @@
-import React, {useState, useEffect } from "react";
+import {useState, useEffect } from "react";
 import {InputGroup, Accordion} from "react-bootstrap";
-import FilterCategory from "../../../../../model/FilterCategory";
-import FilterTrace from "../../../../../model/FilterTrace";
-import LoadingData from "../../../../../model/LoadingData";
+import type FilterCategory from "../../../../../model/FilterCategory";
+import type FilterTrace from "../../../../../model/FilterTrace";
+import type LoadingData from "../../../../../model/LoadingData";
 
 import Message from "../../../../../model/Message";
 import Util from "../../../../../Util";
@@ -71,16 +71,16 @@ function DataFilterCategory(props: DataFilterCategoryProps) {
                 props.postMessage(new Message(Message.ERROR, error.title, error.text));
             });
       }, []);
-  const components = data.data?.map((m, idx) => <DataFilterEntry
+  const components = data.data?.map((m) => <DataFilterEntry
     updFilter={props.updFilter} filterName={m.filterName} id={m.id} label={m.label}/>);
   return (
     <Accordion.Item eventKey="0">
       <Accordion.Header>{props.category.categoryTitle}</Accordion.Header>
       <Accordion.Body>
         {components && components.map((component, index) => (
-          <React.Fragment key={index}>
+          <div key={index}>
                 { component }
-          </React.Fragment>
+          </div>
         ))}
       </Accordion.Body>
     </Accordion.Item>

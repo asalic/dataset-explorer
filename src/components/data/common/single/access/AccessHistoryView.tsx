@@ -1,6 +1,6 @@
-import React, {useMemo, useState, useEffect, useCallback } from 'react';
+import {useMemo, useState, useEffect, useCallback } from 'react';
 import { Table as BTable, Container, Row, Col} from 'react-bootstrap';
-import { CellProps, Column, useTable } from 'react-table';
+import { type CellProps, type Column, useTable } from 'react-table';
 import { useKeycloak } from '@react-keycloak/web';
 import { useSearchParams } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import type AccessHistory from "../../../../../model/AccessHistory";
 import type ItemPage from "../../../../../model/ItemPage";
 import DataManager from '../../../../../api/DataManager';
 import PaginationFooter from '../../../../common/PaginationFooter';
-import LoadingData from '../../../../../model/LoadingData';
+import type LoadingData from '../../../../../model/LoadingData';
 import LoadingView from '../../../../common/LoadingView';
 import TableNoData from '../../../../common/TableNoData';
 
@@ -46,11 +46,11 @@ function TableComponent({ columns, data }: TableComponentProps): JSX.Element {
       <tbody>
         {
           ( 
-            rows.length > 0 && rows.map((row, i) => {
+            rows.length > 0 && rows.map((row) => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
+                {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps({className: "word-wrap"})}>
                       {cell.render('Cell')}

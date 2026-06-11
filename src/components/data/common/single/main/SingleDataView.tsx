@@ -1,9 +1,9 @@
 import {Row, Col, Container, Alert } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useKeycloak } from "@react-keycloak/web";
-import SingleData from "../../../../../model/SingleData";
-import SingleItemTab from "../../../../../model/SingleItemTab";
+import type SingleData from "../../../../../model/SingleData";
+import type SingleItemTab from "../../../../../model/SingleItemTab";
 import Breadcrumbs from "../../../../common/Breadcrumbs";
 import SingleDataTitle from "./SingleDataTitle";
 import SingleDataActions from "./SingleDataActions";
@@ -14,7 +14,7 @@ import { useDeleteSingleDataCreatingMutation, useGetSingleDataQuery,
          usePostSingleDataRestartCreationMutation, usePostSingleDataReadjustFilePermissionsMutation, 
          usePostSingleDataRecollectMetadataMutation, usePostSingleDataCheckIntegrityMutation } from "../../../../../service/singledata-api";
 import Util from "../../../../../Util";
-import CheckIntegrity from "../../../../../model/CheckIntegrity";
+import type CheckIntegrity from "../../../../../model/CheckIntegrity";
 import DelCancelSingleDataMsg from "../../../../common/DelCancelSingleDataMsg";
 import TabsView from "../../../../common/TabsView";
 import SingleDataTags from "./SingleDataTags";
@@ -102,7 +102,7 @@ function IntegrityMessage({integrityError, integrityData, integrityUpdating}: In
 
 
 
-interface SingleDataViewProps<T extends SingleData> {
+interface SingleDataViewProps {
   singleDataType: SingleDataType;
   showDialog: Function;
   keycloakReady: boolean;
@@ -111,7 +111,7 @@ interface SingleDataViewProps<T extends SingleData> {
   tabs: SingleItemTab[];
 }
 
-function SingleDataView<T extends SingleData>(props: SingleDataViewProps<T>): JSX.Element {
+function SingleDataView<T extends SingleData>(props: SingleDataViewProps): JSX.Element {
 
   // const path: string | null | undefined = matchPath( location.pathname, routesTabs )?.path;
 

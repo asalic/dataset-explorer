@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Container, Row, Col} from 'react-bootstrap';
 import { useKeycloak } from "@react-keycloak/web";
 import StaticValues from "../../../../../api/StaticValues";
@@ -10,7 +10,7 @@ import NoDataView from "../../../../common/NoDataView";
 import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/singledata-api";
 import Util from "../../../../../Util";
 import SingleDataType from "../../../../../model/SingleDataType";
-import Dataset from "../../../../../model/Dataset";
+import type Dataset from "../../../../../model/Dataset";
 import GenericFieldEdit from "../../../../common/fieldedit/GenericFieldEdit";
 import BodyFactorySpecType from "../../../../../model/BodyFactorySpecType";
 

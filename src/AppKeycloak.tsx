@@ -4,7 +4,7 @@ import type {
   AuthClientError
 } from '@react-keycloak/core'
 import keycloakConfig from './keycloak';
-import  React, { useState, useCallback } from "react";
+import  { useState, useCallback } from "react";
 import config from "./service/config";
 
 import App from "./App";
@@ -27,7 +27,7 @@ function AppKeycloak() {
           //console.log('keycloak ready', keycloakReady);
   }, []);
 
-  const tokenLogger = (tokens?: any) => {
+  const tokenLogger = (_tokens?: any) => {
     //console.log('onKeycloakTokens');//, tokens)
   }
 

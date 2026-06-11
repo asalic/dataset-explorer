@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import SingleData from "../../../../../model/SingleData";
+import { useCallback } from "react";
+import type SingleData from "../../../../../model/SingleData";
 import { useKeycloak } from "@react-keycloak/web";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
@@ -52,7 +52,7 @@ function showDialogPublishDs<T extends SingleData>(token: string | null | undefi
 
 
 
-  interface SingleDataActionsProps<T extends SingleData> {
+  interface SingleDataActionsProps{
       showDialog: Function;
       keycloakReady: boolean;
       singleDataId: string;
@@ -60,7 +60,8 @@ function showDialogPublishDs<T extends SingleData>(token: string | null | undefi
   }
   
 
-function SingleDataActions<T extends SingleData>({ showDialog, keycloakReady, singleDataId, singleDataType }: SingleDataActionsProps<T>) {
+function SingleDataActions({ showDialog, keycloakReady, singleDataId, singleDataType }: 
+      SingleDataActionsProps) {
 
     let { keycloak } = useKeycloak();
     const navigate = useNavigate();

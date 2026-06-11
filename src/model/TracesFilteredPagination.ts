@@ -1,5 +1,5 @@
 
-export default class TracesFilteredPagination {
+export default interface TracesFilteredPagination {
 
     
 }

@@ -1,5 +1,5 @@
 
-export default class TraceTable {
+export default interface TraceTable {
 
     action: string;
     user: string;

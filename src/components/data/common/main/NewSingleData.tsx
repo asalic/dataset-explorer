@@ -1,5 +1,4 @@
 import { Button } from "react-bootstrap";
-import React from "react";
 import SingleDataType from "../../../../model/SingleDataType";
 import { useNavigate } from "react-router-dom";
 import DialogSize from "../../../../model/DialogSize";

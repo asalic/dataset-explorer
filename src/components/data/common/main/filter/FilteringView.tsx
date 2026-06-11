@@ -1,7 +1,6 @@
-import React from "react";
 import { Container } from "react-bootstrap";
 import DataManager from "../../../../../api/DataManager";
-import FilterFlags, { FilterFlag } from "./FilterFlags";
+import FilterFlags, { type FilterFlag } from "./FilterFlags";
 import FilterProject from "./FilterProject";
 import FilterTag from "./FilterTag";
 

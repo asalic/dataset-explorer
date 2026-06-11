@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TagEditor from "../../../../../common/tag/TagEditor";
 import { Alert, Button } from "react-bootstrap";
 

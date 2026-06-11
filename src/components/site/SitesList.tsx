@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import MessageView from "../common/MessageView";
 import Message from "../../model/Message";
-import SiteShort from "../../model/site/SiteShort";
+import type SiteShort from "../../model/site/SiteShort";
 import { ListGroup } from "react-bootstrap";
 
 // const CODE_ATT = "data-site-code";

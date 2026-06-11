@@ -1,5 +1,5 @@
 
-export default class FilterTrace {
+export default interface FilterTrace {
 
     filterName: string;
     id: string;

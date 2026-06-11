@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { Table as BTable, Container, Row, Col} from 'react-bootstrap';
-import React, { CellProps, useTable } from 'react-table';
+import { type CellProps, useTable } from 'react-table';
 import type { Column } from 'react-table';
 import { useKeycloak } from '@react-keycloak/web';
 import {
@@ -9,20 +9,20 @@ import {
 
 import DataFilterView from "./DataFilterView";
 import config from "../../../../../service/config";
-import LoadingData from "../../../../../model/LoadingData";
+import type LoadingData from "../../../../../model/LoadingData";
 import DataManager from "../../../../../api/DataManager";
 import Util from "../../../../../Util";
-import TraceTable from "../../../../../model/TraceTable";
-import RespTraces from "../../../../../model/RespTraces";
-import TracesBCPaginated from "../../../../../model/TracesBCPaginated";
-import LoadingError from "../../../../../model/LoadingError";
+import type TraceTable from "../../../../../model/TraceTable";
+import type RespTraces from "../../../../../model/RespTraces";
+import type TracesBCPaginated from "../../../../../model/TracesBCPaginated";
+import type LoadingError from "../../../../../model/LoadingError";
 import PaginationFooter from "../../../../common/PaginationFooter";
 import TableNoData from "../../../../common/TableNoData";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
 import NoDataView from "../../../../common/NoDataView";
 
-class LoadingTraces extends LoadingData<TraceTable[]> {
+interface LoadingTraces extends LoadingData<TraceTable[]> {
   tracesFiltered: TraceTable[];
   totalTracesCnt: number;
 }
@@ -57,7 +57,7 @@ function TableComponent({ columns, data }: TableComponentProps<any>): JSX.Elemen
       </thead>
       <tbody>
         {
-        ( rows.length > 0 && rows.map((row, i) => {
+        ( rows.length > 0 && rows.map((row) => {
           prepareRow(row)
           return (
             <tr {...row.getRowProps()}>

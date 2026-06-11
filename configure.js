@@ -1,5 +1,7 @@
-const fs = require('fs');
-let pjson = require('./package.json');
+import fs from 'node:fs';
+import pkg from './package.json' with {type: "json"};
+
+let pjson = JSON.parse(JSON.stringify(pkg));
 
 if (process.argv.length !== 3) {
   console.error("This script requires an argument, either dev (for development execution), prod-test (for production test), prod (for production release), or prod-eucaim (production eucaim cluster");

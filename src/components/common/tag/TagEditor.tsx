@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import { type ChangeEvent, useCallback, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import DeletableTagComponent from "./DeletableTagComponent";
 import styles from "./TagEditor.module.css";

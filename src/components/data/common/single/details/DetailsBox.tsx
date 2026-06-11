@@ -1,7 +1,7 @@
 import SingleDataType from "../../../../../model/SingleDataType";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 // import DatasetFieldEdit from "../common/DatasetFieldEdit";
-import SingleData from "../../../../../model/SingleData";
+import type SingleData from "../../../../../model/SingleData";
 import SingleDataTypeApiType from "../../../../../model/SingleDataTypeApiType";
 import { Badge } from "react-bootstrap";
 import CollectionMethodType from "../../../../../model/CollectionMethodType";

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Alert, Container } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import { useKeycloak } from '@react-keycloak/web';

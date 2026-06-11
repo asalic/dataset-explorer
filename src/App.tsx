@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
@@ -101,8 +101,8 @@ function App({ keycloakReady }: AppProps) {
                     <Route path="/" element={<Navigate to="/datasets" replace />} />
                     <Route path="/fair" element={<FairView />} />
                     <Route path="/support" element={<SupportView />} />
-                    <Route path="/models" element={<ModelsMainView keycloakReady={keycloakReady}
-                        dataManager={dataManager} postMessage={postMessage} />} />
+                    <Route path="/models" element={<ModelsMainView //keycloakReady={keycloakReady} dataManager={dataManager} postMessage={postMessage} 
+                        />} />
                     <Route path="/datasets" element={<DatasetsMainView showDialog={showDialog} keycloakReady={keycloakReady}
                         dataManager={dataManager} postMessage={postMessage} />} />
                     <Route path={UrlFactory.datasetNew()} element={<NewDataset keycloakReady={keycloakReady} />} />

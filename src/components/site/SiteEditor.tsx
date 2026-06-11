@@ -1,11 +1,11 @@
-import React, { FormEvent } from "react";
+import { type FormEvent } from "react";
 import { useGetSiteQuery, usePutSiteMutation } from "../../service/site-api";
 import { useKeycloak } from "@react-keycloak/web";
 import MessageView from "../common/MessageView";
 import LoadingView from "../common/LoadingView";
 import ErrorView from "../common/ErrorView";
 import Util from "../../Util";
-import Site from "../../model/site/Site";
+import type Site from "../../model/site/Site";
 import { Button, Form } from "react-bootstrap";
 import Message from "../../model/Message";
 import UrlFactory from "../../service/UrlFactory";

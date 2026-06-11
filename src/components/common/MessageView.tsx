@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import {useState, useCallback, useEffect} from 'react';
 import {Alert} from "react-bootstrap";
 
 import Message from "../../model/Message";
@@ -29,7 +29,7 @@ function AlertEntry(props: AlertEntryProps): JSX.Element {
 const MessageView = (props: MessageViewProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
     const onAlertClose = useCallback((idx: number) => {
-      setMessages(oldArray => oldArray.filter((el, i) => i !== idx));
+      setMessages(oldArray => oldArray.filter((_el, i) => i !== idx));
         //console.log(messages);
     }, []);
   //const [messages, setMessages] = useState(null);
@@ -48,9 +48,9 @@ const MessageView = (props: MessageViewProps) => {
   return (
     <div>
     {components.map((component, index) => (
-      <React.Fragment key={index}>
+      <div key={index}>
             { component }
-      </React.Fragment>
+      </div>
     ))}
     </div>
   );

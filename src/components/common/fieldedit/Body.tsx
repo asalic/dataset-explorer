@@ -1,5 +1,5 @@
 // import { Button} from "react-bootstrap";
-import React, {FormEvent, useState} from "react";
+import { type FormEvent, useState} from "react";
 
 type InputType =  "textarea" | "input-text" | "input-url";
 

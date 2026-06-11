@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import { Badge, Table as BTable } from 'react-bootstrap';
 import { ArrowDownUp, CaretDownFill, CaretUpFill } from "react-bootstrap-icons";
 import { useTable, useRowSelect, useFilters, useGlobalFilter, useSortBy, Row, Column, CellProps } from 'react-table';
-import React, { Fragment, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import {matchSorter} from 'match-sorter';
 
 import DataManager from "../../api/DataManager";
 import TableNoData from "../common/TableNoData";
 import UrlFactory from "../../service/UrlFactory";
-import UserListItem from "../../model/user/UserListItem";
-import MainTableSortBy from "../../model/MainTableSortBy";
+import type UserListItem from "../../model/user/UserListItem";
+import type MainTableSortBy from "../../model/MainTableSortBy";
 
 
 interface DefaultColumnFilterColumn {

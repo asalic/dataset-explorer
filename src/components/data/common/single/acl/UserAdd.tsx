@@ -1,5 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web";
-import React, { FormEvent, useCallback, useRef, useState } from "react";
+import { type FormEvent, useCallback, useRef, useState } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import LoadingView from "../../../../common/LoadingView";
 import SingleDataType from "../../../../../model/SingleDataType";

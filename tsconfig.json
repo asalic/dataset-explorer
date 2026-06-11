@@ -1,36 +1,7 @@
 {
-    "include": ["./src/**/*.js", "./src/**/*.ts", "./src/**/*.jsx", "./src/**/*.tsx", "./src/**/*.json", "global.d.ts" ],
-    "exclude": ["./test", "./node_modules", "./build"],
-    "compilerOptions": {
-      "rootDir": "./src",
-      "jsx": "react",
-      "allowSyntheticDefaultImports": true,
-      "sourceMap": true,
-      "outDir": "./build/",
-      "lib": [
-        "ES2022", "dom", "dom.iterable"
-      ],
-      "module": "esnext",
-      "target": "ES2020",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "moduleResolution": "bundler",
-      "allowUnusedLabels": true,
-      "allowUnreachableCode": false,
-      "exactOptionalPropertyTypes": true,
-      "noFallthroughCasesInSwitch": true,
-      "noImplicitOverride": true,
-      "noImplicitReturns": true,
-      "noPropertyAccessFromIndexSignature": true,
-      "noUncheckedIndexedAccess": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": false,
-      "checkJs": true,
-      "resolveJsonModule": true,
-      "strictPropertyInitialization": false,
-      "importsNotUsedAsValues": "preserve"
-    },
-    "compileOnSave": true
-  }
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}

@@ -1,5 +1,5 @@
 
-export default class FilterCategory {
+export default interface FilterCategory {
     categoryTitle: string;
     filterCategoryName: string;
     filterMapping: Function;

@@ -1,18 +1,18 @@
 import { useKeycloak } from "@react-keycloak/web";
-import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
+import { type ChangeEvent, type FormEvent, useCallback, useEffect, useState } from "react";
 import LoadingView from "../../../common/LoadingView";
 import ErrorView from "../../../common/ErrorView";
 import { useGetProjectsQuery, useGetSingleDataPageQuery, useLazyGetSubprojectsQuery, useLazyGetUpgradableDatasetsQuery, usePostDatasetMutation } from "../../../../service/singledata-api";
 import SingleDataType from "../../../../model/SingleDataType";
 import Util from "../../../../Util";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import Subproject from "../../../../model/project/Subproject";
+import type Subproject from "../../../../model/project/Subproject";
 import { useNavigate } from "react-router-dom";
 import UrlFactory from "../../../../service/UrlFactory";
 import CollectionMethodType from "../../../../model/CollectionMethodType";
 import SingleDataTypeApiType from "../../../../model/SingleDataTypeApiType";
-import UpgradableDataset from "../../../../model/UpgradableDataset";
-import Select, { ActionMeta, Props, GroupBase, SingleValue } from "react-select";
+import type UpgradableDataset from "../../../../model/UpgradableDataset";
+import Select, { type Props, type GroupBase, type SingleValue } from "react-select";
 import MultiMessageBox from "../../../common/MultiMessageBox";
 
 interface SelOpt {
@@ -26,7 +26,7 @@ function toSelId(val: UpgradableDataset): SelOpt {
 }
 
 function CustomSelect<
-    Option = SelOpt,
+    // Option = SelOpt,
     IsMulti extends boolean = false,
     Group extends GroupBase<SelOpt> = GroupBase<SelOpt>
 >(props: Props<SelOpt, IsMulti, Group>) {
@@ -138,9 +138,8 @@ export default function NewDataset({ keycloakReady }: NewDatasetProps): JSX.Elem
         setSubproject(event.target.value);
     }
 
-    const updSelectedOption = useCallback((newVal: SingleValue<SelOpt>, action?: ActionMeta<SelOpt> | null) => {
+    const updSelectedOption = useCallback((newVal: SingleValue<SelOpt>) => {
         setPreviousId(newVal);
-        console.log(newVal);
     }, [setPreviousId]);
 
     const isFormDisabled = subprojectsQueryLazyState.isLoading || projectsQuery.isLoading

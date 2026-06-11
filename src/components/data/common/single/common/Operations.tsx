@@ -1,7 +1,6 @@
-import React from "react";
 import Util from "../../../../../Util";
 import config from "../../../../../service/config";
-import DialogSettings from "../../../../../model/DialogSettings";
+import type DialogSettings from "../../../../../model/DialogSettings";
 import DialogSize from "../../../../../model/DialogSize";
 
 const KUBE_APPS_CLUSTER = "default";
@@ -34,7 +33,7 @@ function onLoadAppsDashboard(iframeDom: HTMLIFrameElement, datasetId: string): v
   // Create an observer instance linked to the callback function
   const config = { attributes: true, childList: true, subtree: true };
   const targetNode: Node | undefined = iframeDom.contentWindow?.document.body;
-  const cb = (mutationsList: MutationRecord[], observer: MutationObserver) => {
+  const cb = (_mutationsList: MutationRecord[], observer: MutationObserver) => {
     observer.disconnect();
     const inp: HTMLInputElement | undefined | null = iframeDom.contentWindow?.document.body.querySelector("#datasets_list-0");
     if (inp) {

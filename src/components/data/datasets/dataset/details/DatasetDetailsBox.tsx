@@ -1,5 +1,4 @@
 import { Container } from "react-bootstrap";
-import React from "react";
 import { useKeycloak } from "@react-keycloak/web";
 
 import SingleDataType from "../../../../../model/SingleDataType";
@@ -8,7 +7,7 @@ import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
 import ProgrammaticError from "../../../../common/ProgrammaticError";
 import DetailsBox, { getEntryWithStudyCnt } from "../../../common/single/details/DetailsBox";
-import Dataset from "../../../../../model/Dataset";
+import type Dataset from "../../../../../model/Dataset";
 
 
 

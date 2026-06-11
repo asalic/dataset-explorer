@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useCallback, useEffect, useState } from "react";
+import { type SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useGetProjectConfigQuery, usePutProjectConfigMutation } from "../../service/singledata-api";
 import { useKeycloak } from "@react-keycloak/web";
 import ErrorView from "../common/ErrorView";
@@ -7,7 +7,7 @@ import {  Button, Form } from "react-bootstrap";
 import LoadingView from "../common/LoadingView";
 import Util from "../../Util";
 import UrlFactory from "../../service/UrlFactory";
-import ProjectConfig from "../../model/project/ProjectConfig";
+import type ProjectConfig from "../../model/project/ProjectConfig";
 import ConfigEditorCommon from "./ConfigEditorCommon";
 
 

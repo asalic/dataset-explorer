@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { EndpointBuilder } from "@reduxjs/toolkit/query";
-import SiteShort from "../model/site/SiteShort";
+import { type EndpointBuilder } from "@reduxjs/toolkit/query";
+import type SiteShort from "../model/site/SiteShort";
 import config from "./config";
 import UrlFactory from "./UrlFactory";
-import Site from "../model/site/Site";
+import type Site from "../model/site/Site";
 
 
 export const apiSites = createApi({

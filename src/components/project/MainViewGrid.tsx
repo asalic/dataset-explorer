@@ -1,6 +1,5 @@
 import { Alert, Button, Card } from "react-bootstrap";
-import React from "react";
-import ProjectListItem from "../../model/project/ProjectListItem";
+import type ProjectListItem from "../../model/project/ProjectListItem";
 import { useGetProjectsQuery } from "../../service/singledata-api";
 import { useKeycloak } from "@react-keycloak/web";
 import LoadingView from "../common/LoadingView";
@@ -9,7 +8,7 @@ import Util from "../../Util";
 import { useNavigate } from "react-router-dom";
 import UrlFactory from "../../service/UrlFactory";
 import NoLogoAvailable from "../common/NoLogoAvailable";
-import ProjectList from "../../model/project/ProjectList";
+import type ProjectList from "../../model/project/ProjectList";
 
 
 interface MainViewGridProps {

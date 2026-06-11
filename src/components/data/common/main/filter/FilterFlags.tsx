@@ -1,4 +1,4 @@
-import React, { useCallback, MouseEvent } from "react";
+import { useCallback, type MouseEvent } from "react";
 import { Button, Badge, Row, Col, Container } from "react-bootstrap";
 import { CheckCircle, CheckCircleFill, DashCircle, DashCircleFill, XCircleFill, XCircle } from "react-bootstrap-icons";
 

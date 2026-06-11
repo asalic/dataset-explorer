@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { PencilFill } from 'react-bootstrap-icons';
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useKeycloak } from '@react-keycloak/web';
 import SingleDataFactory from "../../../api/SingleDataFactory";
 import Dialog from "../Dialog";

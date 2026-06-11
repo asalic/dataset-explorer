@@ -1,4 +1,3 @@
-import React from "react";
 import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
 import ProjectAllowedActions from "../../../model/project/ProjectAllowedActions";

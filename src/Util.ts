@@ -1,5 +1,5 @@
 import InvalidArgumentError from "./error/InvalidArgumentError";
-import ConfigJson from "./model/ConfigJson";
+import type ConfigJson from "./model/ConfigJson";
 import type LoadingError from "./model/LoadingError";
 import SingleDataType from "./model/SingleDataType";
 

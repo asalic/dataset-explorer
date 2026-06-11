@@ -1,8 +1,7 @@
-import React from "react";
 import { useKeycloak } from "@react-keycloak/web";
 import { Button, ListGroup } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";
-import AclUser from "../../../../../model/AclUser";
+import type AclUser from "../../../../../model/AclUser";
 import { useDeleteSingleDataAclMutation } from "../../../../../service/singledata-api";
 import SingleDataType from "../../../../../model/SingleDataType";
 

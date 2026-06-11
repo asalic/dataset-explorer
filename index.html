@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -10,8 +10,10 @@
       content="Dataset Explorer"
     />
 
-    <script>
-        globalThis.PUBLIC_URL = "%PUBLIC_URL%";
+    <script type="module">
+        //globalThis.PUBLIC_URL = "%PUBLIC_URL%";
+        console.log(import.meta.env.BASE_URL)
+        globalThis.PUBLIC_URL = import.meta.env.BASE_URL;
     </script>
     <!-- <script id="public-url-get" src="publicRoot.js"></script>
     <script>
@@ -40,15 +42,6 @@
   <body class="d-flex flex-column min-vh-100">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root" class="d-flex flex-column min-vh-100"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

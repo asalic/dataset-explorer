@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
+import { type ChangeEvent, type FormEvent, useCallback, useEffect, useState } from "react";
 import { useGetSubprojectsQuery, usePutSubprojectMutation } from "../../../service/singledata-api";
 import Util from "../../../Util";
 import ErrorView from "../../common/ErrorView";
 import LoadingView from "../../common/LoadingView";
 import { useKeycloak } from "@react-keycloak/web";
-import Subproject from "../../../model/project/Subproject";
+import type Subproject from "../../../model/project/Subproject";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import UrlFactory from "../../../service/UrlFactory";

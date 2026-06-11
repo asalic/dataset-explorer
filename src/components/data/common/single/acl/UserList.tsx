@@ -1,4 +1,3 @@
-import React from "react";
 import { useKeycloak } from "@react-keycloak/web";
 import { ListGroup } from "react-bootstrap";
 import UserEntry from "./UserEntry";

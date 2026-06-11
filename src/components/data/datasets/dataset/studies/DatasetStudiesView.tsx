@@ -1,22 +1,22 @@
-import React, {useMemo, useState, useEffect, Fragment, useCallback } from 'react';
+import {useMemo, useState, useEffect, Fragment, useCallback } from 'react';
 import { Table as BTable, Container, Row, Col} from 'react-bootstrap';
-import { CellProps, useTable } from 'react-table';
+import { type CellProps, useTable } from 'react-table';
 import type { Column } from 'react-table';
 import { useKeycloak } from '@react-keycloak/web';
 
 import config from "../../../../../service/config";
 import Message from "../../../../../model/Message";
 import LoadingView from "../../../../common/LoadingView";
-import Series from "../../../../../model/Series";
-import LoadingData from "../../../../../model/LoadingData";
-import LoadingError from "../../../../../model/LoadingError";
+import type Series from "../../../../../model/Series";
+import type LoadingData from "../../../../../model/LoadingData";
+import type LoadingError from "../../../../../model/LoadingError";
 import DataManager from '../../../../../api/DataManager';
-import Study from '../../../../../model/Study';
+import type Study from '../../../../../model/Study';
 import Util from '../../../../../Util';
 import TableNoData from "../../../../common/TableNoData";
 import { useSearchParams } from 'react-router-dom';
 import PaginationFooter from '../../../../common/PaginationFooter';
-import ItemPage from '../../../../../model/ItemPage';
+import type ItemPage from '../../../../../model/ItemPage';
 
 //const STUDY_VISIBLE_SERIES = 1;
 
@@ -50,7 +50,7 @@ function TableComponent({ columns, data }: TableComponentProps<any>): JSX.Elemen
       </thead>
       <tbody>
         {
-          ( rows.length > 0 && rows.map((row, i) => {
+          ( rows.length > 0 && rows.map((row) => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>
@@ -75,7 +75,7 @@ function generateSeriesCellView(series: Series[], seriesLimit: number): string {
   return series.map(s => s["folderName"]).slice(0, seriesLimit).join(", ");
 }
 
-function generateSeriesCell(series: Series[], seriesLimit: number, onclickCb: Function | null): JSX.Element {
+function generateSeriesCell(series: Series[], seriesLimit: number): JSX.Element {
   if (series.length === 0) {
     return <Fragment />;
   }
@@ -176,7 +176,7 @@ function DatasetStudiesView(props: DatasetStudiesViewProps): JSX.Element {
         Header: 'Series',
         Cell: (propsC: CellProps<any>) => (
           <Container fluid>
-            { generateSeriesCell(propsC.row.original.series, propsC.row.original.series.length, null) }
+            { generateSeriesCell(propsC.row.original.series, propsC.row.original.series.length) }
           </Container>
         )
       }
