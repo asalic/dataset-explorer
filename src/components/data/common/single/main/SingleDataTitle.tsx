@@ -1,7 +1,7 @@
 import { Badge } from "react-bootstrap";
 import { useKeycloak } from "@react-keycloak/web";
 import { Envelope } from "react-bootstrap-icons";
-import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/singledata-api";
+import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/api/singledata-api";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
 import SingleDataType from "../../../../../model/SingleDataType";

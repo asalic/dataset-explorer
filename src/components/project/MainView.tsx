@@ -2,7 +2,7 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { Button } from "react-bootstrap";
 import MainViewGrid from "./MainViewGrid";
-import { useGetProjectsQuery } from "../../service/singledata-api";
+import { useGetProjectsQuery } from "../../service/api/projects-api";
 import ErrorView from "../common/ErrorView";
 import Util from "../../Util";
 import { useNavigate } from "react-router-dom";

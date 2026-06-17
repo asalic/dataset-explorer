@@ -9,7 +9,8 @@ import DialogSize from "../../../../../model/DialogSize";
 import SingleDataType from "../../../../../model/SingleDataType";
 import { useDeleteSingleDataCreatingMutation, useGetSingleDataQuery, usePatchSingleDataMutation, 
          usePostSingleDataRestartCreationMutation, usePostSingleDataReadjustFilePermissionsMutation, 
-         usePostSingleDataRecollectMetadataMutation, usePostSingleDataCheckIntegrityMutation } from "../../../../../service/singledata-api";
+         usePostSingleDataRecollectMetadataMutation, usePostSingleDataCheckIntegrityMutation } 
+         from "../../../../../service/api/singledata-api";
 
 function getAction(actionCb: Function, txt: string, keyName: string): JSX.Element {
       return <Dropdown.Item eventKey={keyName} key={keyName} href="#"

@@ -7,7 +7,7 @@ import MessageBox from "./MessageBox";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
 import NoDataView from "../../../../common/NoDataView";
-import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/singledata-api";
+import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/api/singledata-api";
 import Util from "../../../../../Util";
 import SingleDataType from "../../../../../model/SingleDataType";
 import type Dataset from "../../../../../model/Dataset";

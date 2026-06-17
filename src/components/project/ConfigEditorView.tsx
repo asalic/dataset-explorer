@@ -1,5 +1,5 @@
 import { type SyntheticEvent, useCallback, useEffect, useState } from "react";
-import { useGetProjectConfigQuery, usePutProjectConfigMutation } from "../../service/singledata-api";
+import { useGetProjectConfigQuery, usePutProjectConfigMutation } from "../../service/api/projects-api";
 import { useKeycloak } from "@react-keycloak/web";
 import ErrorView from "../common/ErrorView";
 import { useNavigate, useParams } from "react-router-dom";

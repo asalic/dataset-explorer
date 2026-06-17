@@ -6,14 +6,28 @@ import UserInfo from "./UserInfo";
 import config from "../../service/config";
 import Util from "../../Util";
 import { useKeycloak } from "@react-keycloak/web";
-import { useGetIndexOperationsQuery } from "../../service/singledata-api";
+import { useGetIndexOperationsQuery } from "../../service/api/general-api";
 import ErrorView from "./ErrorView";
 import INDEX_OPERATIONS from "../../model/IndexOperations";
 import UrlFactory from "../../service/UrlFactory";
 import SingleDataType from "../../model/SingleDataType";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+interface DatasetOps {
+    [key: string]: {
+        link: string;
+        title: string;
+        name: string
+    }
+}
 
+const DATASET_OPERATIONS: DatasetOps = {
+        [INDEX_OPERATIONS.DATASET_TRANSFERS]: {
+            link: UrlFactory.datasetTransfers(),
+            name: "Transfers",
+            title: "List of datasets transfers"
+        }
+    };
 
 function getReleaseConf() {
     const release = Util.getReleaseType(config);
@@ -34,6 +48,8 @@ function NavbarView() {
 
     const { keycloak } = useKeycloak();
     const { data, isError, error } = useGetIndexOperationsQuery({ token: keycloak.token });
+    const datasetOps =  Object.fromEntries(Object.entries(DATASET_OPERATIONS).filter(op => data?.includes(op[0])));
+    const navigate = useNavigate();
 
     const rc = useMemo(() => getReleaseConf(), []);
     const nbCollapseId = useId();
@@ -53,11 +69,28 @@ function NavbarView() {
                                 </div>
                             </div>
                         </Navbar.Brand>
-                        <Nav.Link as={Link} title="List of datasets" to={UrlFactory.singleData(SingleDataType.DATASET)}>Datasets</Nav.Link>
+                        {
+                            Object.keys(datasetOps).length > 0 ?
+                                <NavDropdown title="Datasets">
+                                    <NavDropdown.Item key="datasets_list" title="List of datasets" 
+                                            onClick={() => navigate(UrlFactory.singleData(SingleDataType.DATASET))}>
+                                        List
+                                    </NavDropdown.Item>
+                                    {
+                                        Object.entries(datasetOps).map(op => <NavDropdown.Item key={op[0]} title={op[1].title}
+                                            onClick={() => navigate(op[1].link)}>
+                                            {op[1].name}
+                                    </NavDropdown.Item>)
+                                    }
+                                </NavDropdown>
+                                : <Nav.Link as={Link} title="List of datasets" to={UrlFactory.singleData(SingleDataType.DATASET)}>Datasets</Nav.Link>
+                        }
+                        
                         <Nav.Link as={Link} title="List of models" to={UrlFactory.singleData(SingleDataType.MODEL)}>Models</Nav.Link>
                         { data?.includes(INDEX_OPERATIONS.PROJECTS) ? <Nav.Link as={Link} title="Manage the projects" to={UrlFactory.projects()}>Projects</Nav.Link> : <></>}
                         { data?.includes(INDEX_OPERATIONS.SITES) ? <Nav.Link as={Link} title="Manage the sites" to={UrlFactory.sites()}>Sites</Nav.Link> : <></> }
                         { data?.includes(INDEX_OPERATIONS.USERS) ? <Nav.Link as={Link} title="Manage the users" to={UrlFactory.users()}>Users</Nav.Link> : <></> }
+                        { data?.includes(INDEX_OPERATIONS.DATASET_TRANSFERS) ? <Nav.Link as={Link} title="Manage dataset transfers" to={UrlFactory.datasetTransfers()}>Transfers</Nav.Link> : <></> }
                         <NavDropdown title="Documentation" id="documentation-dropdown">
                             <NavDropdown.Item key="Workstation_Usage_Guide" title="Workstation Usage Guide" href={config.externalLinks.workstationUsageGuide} target="_blank">Workstation Usage</NavDropdown.Item>
                             <NavDropdown.Item key="Dataset_Usage_Guide" title="Dataset Usage Guide" href={config.externalLinks.datasetUsageGuide} target="_blank">Dataset Usage</NavDropdown.Item>

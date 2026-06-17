@@ -1,13 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { api } from './service/singledata-api';
-import { apiSites } from './service/site-api';
+import { api } from './service/api/api';
 import { useDispatch } from 'react-redux';
 // import authReducer from './authSlice';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 const rootReducer = combineReducers({
-    [api.reducerPath]: api.reducer,
-    [apiSites.reducerPath]: apiSites.reducer,
+    [api.reducerPath]: api.reducer
     //auth: authReducer
   });
 
@@ -15,7 +13,7 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (gDM) => gDM().concat(api.middleware, apiSites.middleware),
+  middleware: (gDM) => gDM().concat(api.middleware),
 })
 
 setupListeners(store.dispatch);

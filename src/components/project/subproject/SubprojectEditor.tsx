@@ -1,5 +1,5 @@
 import { type ChangeEvent, type FormEvent, useCallback, useEffect, useState } from "react";
-import { useGetSubprojectsQuery, usePutSubprojectMutation } from "../../../service/singledata-api";
+import { useGetSubprojectsQuery, usePutSubprojectMutation } from "../../../service/api/projects-api";
 import Util from "../../../Util";
 import ErrorView from "../../common/ErrorView";
 import LoadingView from "../../common/LoadingView";

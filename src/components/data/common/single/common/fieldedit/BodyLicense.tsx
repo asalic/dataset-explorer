@@ -6,7 +6,7 @@ import { useKeycloak } from "@react-keycloak/web";
 import type License from "../../../../../../model/License";
 import ErrorView from "../../../../../common/ErrorView";
 import LoadingView from "../../../../../common/LoadingView";
-import { useGetLicensesQuery } from "../../../../../../service/singledata-api";
+import { useGetLicensesQuery } from "../../../../../../service/api/datasets-api";
 import { useState } from "react";
 // import PatchMessage from "../../../../../common/PatchMessage";
 

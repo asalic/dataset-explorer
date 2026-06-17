@@ -12,7 +12,8 @@ import ErrorView from "../../../../common/ErrorView";
 import SingleDataType from "../../../../../model/SingleDataType";
 import { useDeleteSingleDataCreatingMutation, useGetSingleDataQuery, 
          usePostSingleDataRestartCreationMutation, usePostSingleDataReadjustFilePermissionsMutation, 
-         usePostSingleDataRecollectMetadataMutation, usePostSingleDataCheckIntegrityMutation } from "../../../../../service/singledata-api";
+         usePostSingleDataRecollectMetadataMutation, usePostSingleDataCheckIntegrityMutation } 
+         from "../../../../../service/api/singledata-api";
 import Util from "../../../../../Util";
 import type CheckIntegrity from "../../../../../model/CheckIntegrity";
 import DelCancelSingleDataMsg from "../../../../common/DelCancelSingleDataMsg";

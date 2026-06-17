@@ -1,16 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { type EndpointBuilder } from "@reduxjs/toolkit/query";
-import type SiteShort from "../model/site/SiteShort";
-import config from "./config";
-import UrlFactory from "./UrlFactory";
-import type Site from "../model/site/Site";
+import type SiteShort from "../../model/site/SiteShort";
+import UrlFactory from "../UrlFactory";
+import type Site from "../../model/site/Site";
+import {api} from "./api"
+import { GetSitesT, GetSiteT, PutSiteT } from "./sites-api-types";
 
-
-export const apiSites = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: config.datasetService.api }),
-  reducerPath: 'siteApi',
-  refetchOnMountOrArgChange: false,
-  tagTypes: ["SitesList", "Site"],
+export const sitesApi = api.injectEndpoints({
   endpoints: (build:  EndpointBuilder<any, any, any>) => ({
     getSites: build.query<Array<SiteShort>, GetSitesT>({
         query: ({token}) => ({
@@ -41,24 +36,9 @@ export const apiSites = createApi({
   }),
 })
 
-interface GetSitesT {
-    token: string | null | undefined;
-}
-
-interface GetSiteT {
-    token: string | null | undefined;
-    siteCode: string;
-}
-
-interface PutSiteT {
-    token: string | null | undefined;
-    site: Site;
-
-}
-
 export const {
     usePutSiteMutation,
     useGetSitesQuery,
     useGetSiteQuery,
     useLazyGetSitesQuery,
-} = apiSites;
+} = sitesApi;

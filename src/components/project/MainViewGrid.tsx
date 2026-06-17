@@ -1,6 +1,6 @@
 import { Alert, Button, Card } from "react-bootstrap";
 import type ProjectListItem from "../../model/project/ProjectListItem";
-import { useGetProjectsQuery } from "../../service/singledata-api";
+import { useGetProjectsQuery } from "../../service/api/projects-api";
 import { useKeycloak } from "@react-keycloak/web";
 import LoadingView from "../common/LoadingView";
 import ErrorView from "../common/ErrorView";

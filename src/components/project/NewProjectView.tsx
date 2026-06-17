@@ -2,7 +2,7 @@ import { type SyntheticEvent, useCallback, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import UrlFactory from "../../service/UrlFactory";
-import {  usePutProjectLogoMutation, usePutProjectMutation } from "../../service/singledata-api";
+import {  usePutProjectLogoMutation, usePutProjectMutation } from "../../service/api/projects-api";
 import { useKeycloak } from "@react-keycloak/web";
 import ErrorView from "../common/ErrorView";
 import Util from "../../Util";

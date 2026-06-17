@@ -7,7 +7,7 @@ import Util from "../../../Util";
 import { useParams } from "react-router-dom";
 //import LoadingError from "../../../../model/LoadingError";
 import ResourceNotFoundView from "../../common/ResourceNotFoundView";
-import { useGetUserQuery } from "../../../service/singledata-api";
+import { useGetUserQuery } from "../../../service/api/users-api";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
 import Breadcrumbs from "../../common/Breadcrumbs";

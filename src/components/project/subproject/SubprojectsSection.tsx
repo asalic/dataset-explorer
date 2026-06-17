@@ -4,7 +4,7 @@ import ProjectAllowedActions from "../../../model/project/ProjectAllowedActions"
 import { FilePlusFill } from "react-bootstrap-icons";
 import { Col, Button } from "react-bootstrap";
 import UrlFactory from "../../../service/UrlFactory";
-import { useGetSubprojectsQuery } from "../../../service/singledata-api";
+import { useGetSubprojectsQuery } from "../../../service/api/projects-api";
 import SubprojectAllowedActions from "../../../model/project/SubprojectAllowedActions";
 import Util from "../../../Util";
 import ErrorView from "../../common/ErrorView";

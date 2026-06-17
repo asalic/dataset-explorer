@@ -1,9 +1,9 @@
 import { useState } from "react";
-import type MutationHookLike from "../model/MutationHookLike";
-import type Logo from "../model/project/Logo";
-import LogoType from "../model/project/LogoType";
-import { usePatchProjectMutation, usePutProjectLogoMutation } from "./singledata-api";
-import Util from "../Util";
+import type MutationHookLike from "../../model/MutationHookLike";
+import type Logo from "../../model/project/Logo";
+import LogoType from "../../model/project/LogoType";
+import { usePatchProjectMutation, usePutProjectLogoMutation } from "./projects-api";
+import Util from "../../Util";
 
 // type Upload = PutProjectLogoT & {
 //     type: LogoType;

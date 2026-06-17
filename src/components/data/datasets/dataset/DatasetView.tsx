@@ -13,7 +13,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { showDialogAppDashhboard } from "../../common/single/common/Operations";
 import ResourceNotFoundView from "../../../common/ResourceNotFoundView";
 import SingleDataType from "../../../../model/SingleDataType";
-import { useGetSingleDataQuery } from "../../../../service/singledata-api";
+import { useGetSingleDataQuery } from "../../../../service/api/singledata-api";
 import type Dataset from "../../../../model/Dataset";
 import DatasetDetailsView from "./details/DatasetDetailsView";
 import LoadingView from "../../../common/LoadingView";

@@ -3,7 +3,7 @@ import { type FormEvent, useCallback, useRef, useState } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import LoadingView from "../../../../common/LoadingView";
 import SingleDataType from "../../../../../model/SingleDataType";
-import { usePutSingleDataAclMutation } from "../../../../../service/singledata-api";
+import { usePutSingleDataAclMutation } from "../../../../../service/api/singledata-api";
 
 interface UserAddProps {
     singleDataId: string;

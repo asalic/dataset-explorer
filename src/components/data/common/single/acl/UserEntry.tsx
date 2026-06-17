@@ -2,7 +2,7 @@ import { useKeycloak } from "@react-keycloak/web";
 import { Button, ListGroup } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";
 import type AclUser from "../../../../../model/AclUser";
-import { useDeleteSingleDataAclMutation } from "../../../../../service/singledata-api";
+import { useDeleteSingleDataAclMutation } from "../../../../../service/api/singledata-api";
 import SingleDataType from "../../../../../model/SingleDataType";
 
 interface UserEntryProps {

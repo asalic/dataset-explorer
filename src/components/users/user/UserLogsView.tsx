@@ -3,7 +3,7 @@ import {  Alert, Button, Form } from "react-bootstrap";
 import { useKeycloak } from "@react-keycloak/web";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
-import { useGetUserManagementJobsQuery, useLazyGetUserManagementJobLogsQuery } from "../../../service/singledata-api";
+import { useGetUserManagementJobsQuery, useLazyGetUserManagementJobLogsQuery } from "../../../service/api/users-api";
 import Util from "../../../Util";
 import type ManagementJob from "../../../model/ManagementJob";
 

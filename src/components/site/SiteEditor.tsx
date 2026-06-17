@@ -1,5 +1,5 @@
 import { type FormEvent } from "react";
-import { useGetSiteQuery, usePutSiteMutation } from "../../service/site-api";
+import { useGetSiteQuery, usePutSiteMutation } from "../../service/api/sites-api";
 import { useKeycloak } from "@react-keycloak/web";
 import MessageView from "../common/MessageView";
 import LoadingView from "../common/LoadingView";

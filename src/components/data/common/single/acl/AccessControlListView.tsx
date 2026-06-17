@@ -3,7 +3,7 @@ import { ListGroup } from "react-bootstrap";
 import UserAdd from "./UserAdd";
 import UserList from "./UserList";
 import SingleDataType from "../../../../../model/SingleDataType";
-import { useGetSingleDataQuery } from "../../../../../service/singledata-api";
+import { useGetSingleDataQuery } from "../../../../../service/api/singledata-api";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
 import type SingleData from "../../../../../model/SingleData";

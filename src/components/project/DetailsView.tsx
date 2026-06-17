@@ -3,7 +3,8 @@ import { Alert, Col, Container, Image, Row } from "react-bootstrap";
 import ErrorView from "../common/ErrorView";
 import LoadingView from "../common/LoadingView";
 import { useKeycloak } from "@react-keycloak/web";
-import { api, useGetProjectConfigQuery, useGetProjectQuery, usePatchProjectMutation } from "../../service/singledata-api";
+import { api } from "../../service/api/api";
+import { useGetProjectConfigQuery, useGetProjectQuery, usePatchProjectMutation } from "../../service/api/projects-api";
 import { Link, useParams } from "react-router-dom";
 import Util from "../../Util";
 import NoLogoAvailable from "../common/NoLogoAvailable";
@@ -14,7 +15,7 @@ import type License from "../../model/License";
 import ProjectAllowedActions from "../../model/project/ProjectAllowedActions";
 import SubprojectsSection from "./subproject/SubprojectsSection";
 import LogoType from "../../model/project/LogoType";
-import { useSaveProject } from "../../service/common-api-custom";
+import { useSaveProject } from "../../service/api/common-api-custom";
 import { useAppSelector } from "../../service/hooks";
 
 function getDefaultLicense(license: object | string | undefined): License | null {

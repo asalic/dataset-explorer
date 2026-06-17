@@ -14,7 +14,7 @@ import DataManager from '../../../../api/DataManager';
 //import ItemPage from '../../../../model/ItemPage';
 //import Dataset from '../../../../model/Dataset';
 import Util from '../../../../Util';
-import { useDeleteSingleDataCreatingMutation, useGetSingleDataPageQuery } from "../../../../service/singledata-api";
+import { useDeleteSingleDataCreatingMutation, useGetSingleDataPageQuery } from "../../../../service/api/singledata-api";
 import SingleDataType from '../../../../model/SingleDataType';
 import DelCancelSingleDataMsg from '../../../common/DelCancelSingleDataMsg';
 import NewSingleData from './NewSingleData';

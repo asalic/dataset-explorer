@@ -1,6 +1,6 @@
 import { type ChangeEvent, type FormEvent, useCallback, useState } from "react";
 import type License from "../../model/License";
-import { useGetLicensesQuery } from "../../service/singledata-api";
+import { useGetLicensesQuery } from "../../service/api/datasets-api";
 import { Alert, Form } from "react-bootstrap";
 import LoadingView from "../common/LoadingView";
 import { useKeycloak } from "@react-keycloak/web";

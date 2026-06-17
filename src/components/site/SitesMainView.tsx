@@ -9,7 +9,7 @@ import ErrorView from "../common/ErrorView";
 import LoadingView from "../common/LoadingView";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import UrlFactory from "../../service/UrlFactory";
-import { useGetSitesQuery } from "../../service/site-api";
+import { useGetSitesQuery } from "../../service/api/sites-api";
 import Util from "../../Util";
 
 const SELECTED_PARAM = "selected";

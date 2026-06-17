@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Placeholder } from "react-bootstrap";
 import Select, { type ActionMeta, type Props, type GroupBase, type SingleValue } from 'react-select';
 import type UpgradableDataset from "../../../../../../model/UpgradableDataset";
-import { useGetUpgradableDatasetsQuery } from "../../../../../../service/singledata-api";
+import { useGetUpgradableDatasetsQuery } from "../../../../../../service/api/datasets-api";
 import ErrorView from "../../../../../common/ErrorView";
 import SingleDataFactory from "../../../../../../api/SingleDataFactory";
 import ProgrammaticError from "../../../../../common/ProgrammaticError";

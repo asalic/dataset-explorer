@@ -6,7 +6,7 @@ import SingleDataTypeApiType from "../../../../../model/SingleDataTypeApiType";
 import { Badge } from "react-bootstrap";
 import CollectionMethodType from "../../../../../model/CollectionMethodType";
 import GenericFieldEdit from "../../../../common/fieldedit/GenericFieldEdit";
-import { usePatchSingleDataMutation } from "../../../../../service/singledata-api";
+import { usePatchSingleDataMutation } from "../../../../../service/api/singledata-api";
 import BodyFactorySpecType from "../../../../../model/BodyFactorySpecType";
 import UrlFactory from "../../../../../service/UrlFactory";
 import { Link } from "react-router-dom";

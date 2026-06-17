@@ -2,7 +2,7 @@ import { useKeycloak } from "@react-keycloak/web";
 import { ListGroup } from "react-bootstrap";
 import UserEntry from "./UserEntry";
 import LoadingView from "../../../../common/LoadingView";
-import { useGetSingleDataAclQuery } from "../../../../../service/singledata-api";
+import { useGetSingleDataAclQuery } from "../../../../../service/api/singledata-api";
 import SingleDataType from "../../../../../model/SingleDataType";
 import ErrorView from "../../../../common/ErrorView";
 

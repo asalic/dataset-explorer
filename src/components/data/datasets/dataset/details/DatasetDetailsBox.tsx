@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { useKeycloak } from "@react-keycloak/web";
 
 import SingleDataType from "../../../../../model/SingleDataType";
-import { useGetSingleDataQuery } from "../../../../../service/singledata-api";
+import { useGetSingleDataQuery } from "../../../../../service/api/singledata-api";
 import LoadingView from "../../../../common/LoadingView";
 import ErrorView from "../../../../common/ErrorView";
 import ProgrammaticError from "../../../../common/ProgrammaticError";

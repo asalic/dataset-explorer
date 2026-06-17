@@ -1,7 +1,7 @@
-import type QueryParamsType from "../model/QueryParamsType";
+import type QueryParamsType from "../../model/QueryParamsType";
 import { type FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import config from "../service/config";
-import Util from "../Util";
+import config from "../../service/config";
+import Util from "../../Util";
 
 
 export function isFetchBaseQueryError(

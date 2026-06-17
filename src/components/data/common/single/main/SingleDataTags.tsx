@@ -6,7 +6,7 @@ import TagComponent from "../../../../common/tag/TagComponent";
 import GenericFieldEdit from "../../../../common/fieldedit/GenericFieldEdit";
 import SingleDataFactory from "../../../../../api/SingleDataFactory";
 import BodyFactorySpecType from "../../../../../model/BodyFactorySpecType";
-import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/singledata-api";
+import { useGetSingleDataQuery, usePatchSingleDataMutation } from "../../../../../service/api/singledata-api";
 
 interface SingleDataTagsProps {
     singleDataId: string;

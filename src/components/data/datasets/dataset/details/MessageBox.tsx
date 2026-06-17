@@ -4,7 +4,8 @@ import { Alert } from "react-bootstrap";
 import { useAppDispatch } from "../../../../../store";
 
 import type SingleData from "../../../../../model/SingleData";
-import { api, useGetDatasetCreationStatusQuery } from "../../../../../service/singledata-api";
+import { useGetDatasetCreationStatusQuery } from "../../../../../service/api/datasets-api";
+import { api } from "../../../../../service/api/api";
 import UrlFactory from "../../../../../service/UrlFactory";
 import SingleDataType from "../../../../../model/SingleDataType";
 import config from "../../../../../service/config";

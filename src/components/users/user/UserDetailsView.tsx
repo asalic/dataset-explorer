@@ -4,8 +4,8 @@ import { useKeycloak } from "@react-keycloak/web";
 import { useNavigate } from "react-router-dom";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
-import { useGetUserQuery, usePutUserMutation, useGetUserSitesQuery, useGetUserRolesQuery, useGetProjectsQuery } 
-  from "../../../service/singledata-api";
+import {useGetProjectsQuery } from "../../../service/api/projects-api";
+import { useGetUserQuery, usePutUserMutation, useGetUserSitesQuery, useGetUserRolesQuery } from "../../../service/api/users-api";
 import Util from "../../../Util";
 import UrlFactory from "../../../service/UrlFactory";
 import MultiSelect from "../../common/MultiSelect";
